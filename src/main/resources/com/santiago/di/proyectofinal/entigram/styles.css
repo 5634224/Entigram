@@ -1,0 +1,22 @@
+/* CSS JavaFX */
+.back-grey
+{
+    -fx-background-color: #e2e2e2;
+}
+
+.back-white
+{
+    -fx-background-color: #ffffff;
+}
+
+.back-red {
+    -fx-background-color: #ff0000;
+}
+
+.back-green {
+    -fx-background-color: #00ff00;
+}
+
+.back-blue {
+    -fx-background-color: #0000ff;
+}

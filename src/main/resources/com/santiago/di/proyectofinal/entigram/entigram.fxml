@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.santiago.di.proyectofinal.entigram.controller.EntigramController">
+   <left>
+      <GridPane prefWidth="100.0" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.0" minWidth="10.0" prefWidth="42.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="10.0" prefWidth="42.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="198.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="560.0" minHeight="10.0" prefHeight="498.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.rowIndex="1">
+               <items>
+                  <Button fx:id="btnEntidad" mnemonicParsing="false" onDragDetected="#btnEntidad_onDragDetected">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/entidad%20fuerte.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Entidad" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnAtributo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onDragDetected="#btnAtributo_onDragDetected">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/atributo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Atributo" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnLinea" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnLinea_onAction">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/flecha.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Relación" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnRelacion" mnemonicParsing="false" onDragDetected="#btnRelacion_onDragDetected">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/relacion%20fuerte.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Relación" />
+                     </tooltip>
+                  </Button>
+               </items>
+            </ToolBar>
+            <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <items>
+                  <Button fx:id="btnEntidadDebil" mnemonicParsing="false" onDragDetected="#btnEntidadDebil_onDragDetected">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/entidad%20debil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Entidad" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnAtributoMultivaluado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/atributo%20multivaluado.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Atributo" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnAtributoDerivado" layoutX="10.0" layoutY="70.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/atributo%20derivado.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Relación" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnRelacionDebil" mnemonicParsing="false" onDragDetected="#btnRelacionDebil_onDragDetected">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/relacion%20debil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Relación" />
+                     </tooltip>
+                  </Button>
+               </items>
+            </ToolBar>
+            <AnchorPane styleClass="back-grey" GridPane.columnSpan="2">
+               <children>
+                  <Label layoutX="5.0" layoutY="14.0" text="Componentes" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="600.0" prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">
+         <children>
+            <Accordion layoutX="3.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <panes>
+                <TitledPane animated="false" text="Propiedades">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="17.0" layoutY="14.0" text="Nombre" />
+                              <TextField fx:id="txtFieldNombre" layoutX="17.0" layoutY="30.0" />
+                              <TextArea fx:id="txtAreaDescripcion" layoutX="17.0" layoutY="105.0" prefHeight="200.0" prefWidth="171.0" />
+                              <Label layoutX="17.0" layoutY="89.0" text="Descripción" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="untitled">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Documento">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+         </children></AnchorPane>
+   </right>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="back-blue" BorderPane.alignment="CENTER">
+         <content>
+            <Pane fx:id="pnLienzo" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" prefHeight="200.0" prefWidth="200.0" styleClass="back-white" />
+         </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <VBox prefHeight="53.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button mnemonicParsing="false" text="Button" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="32.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblEstado" text="Herramienta seleccionada" />
+         </children>
+         <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
