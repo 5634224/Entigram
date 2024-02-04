@@ -4,45 +4,85 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.control.SkinBase;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
-public class DoubleEllipse extends Control {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Ellipse ellipse;
+public class DoubleEllipse extends Control {
+    private List<DragObserver> observers;
+    private double orgSceneX, orgSceneY;
+    private double orgTranslateX, orgTranslateY;
+    private Ellipse outerEllipse;
+    private Ellipse innerEllipse;
     private Label label;
 
     public DoubleEllipse() {
         super();
+
+        // Inicializa la lista de observadores
+        observers = new ArrayList<>();
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
         setHeight(75);
 
         // Crea una elipse
-        ellipse = new Ellipse();
+        outerEllipse = new Ellipse();
+        innerEllipse = new Ellipse();
 
         // Sin color de fondo
-        ellipse.setFill(Color.WHITE);
+        outerEllipse.setFill(Color.WHITE);
+        innerEllipse.setFill(Color.WHITE);
 
         // Borde negro
-        ellipse.setStroke(Color.BLACK);
+        outerEllipse.setStroke(Color.BLACK);
+        innerEllipse.setStroke(Color.BLACK);
 
         // Label
         label = new Label("Prueba");
         label.setFont(Font.font(14.0));
         label.setTextFill(Color.BLACK);
 
-        getChildren().addAll(ellipse, label);
+        // Agregar controladores de eventos de arrastre
+        setOnMousePressed(this::handleMousePressed);
+        setOnMouseDragged(this::handleMouseDragged);
+        setOnMouseReleased(this::handleMouseReleased);
+
+        getChildren().addAll(outerEllipse, innerEllipse, label);
+    }
+
+    public void addObserver(DragObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(DragObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers(String mensaje) {
+        for (DragObserver observer : observers) {
+            observer.updateEstado(mensaje);
+        }
     }
 
     @Override
     public void layoutChildren() {
-        ellipse.setCenterX(getWidth() / 2);
-        ellipse.setCenterY(getHeight() / 2);
-        ellipse.setRadiusX(getWidth() / 2);
-        ellipse.setRadiusY(getHeight() / 2);
+        // Redimensiona la elipse exterior
+        outerEllipse.setCenterX(getWidth() / 2);
+        outerEllipse.setCenterY(getHeight() / 2);
+        outerEllipse.setRadiusX(getWidth() / 2);
+        outerEllipse.setRadiusY(getHeight() / 2);
+
+        // Redimensiona la elipse interior
+        final double INNER_ELLIPSE_RATIO = 0.9; // Ajusta este valor para cambiar el tamaño de la elipse interior
+        innerEllipse.setCenterX(getWidth() / 2);
+        innerEllipse.setCenterY(getHeight() / 2);
+        innerEllipse.setRadiusX(outerEllipse.getRadiusX() * INNER_ELLIPSE_RATIO);
+        innerEllipse.setRadiusY(outerEllipse.getRadiusY() * INNER_ELLIPSE_RATIO);
 
         // Centrar el Label en el control
         label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
@@ -51,26 +91,24 @@ public class DoubleEllipse extends Control {
 
     @Override
     public void resize(double width, double height) {
-        setWidth(width);
-        setHeight(height);
         requestLayout();
     }
 
     public double getEllipseWidth() {
-        return ellipse.getRadiusX() * 2;
+        return outerEllipse.getRadiusX() * 2;
     }
 
     public void setEllipseWidth(double width) {
-        ellipse.setRadiusX(width / 2);
+        setWidth(width);
         requestLayout();
     }
 
     public double getEllipseHeight() {
-        return ellipse.getRadiusY() * 2;
+        return outerEllipse.getRadiusY() * 2;
     }
 
     public void setEllipseHeight(double height) {
-        ellipse.setRadiusY(height / 2);
+        setHeight(height);
         requestLayout();
     }
 
@@ -96,5 +134,30 @@ public class DoubleEllipse extends Control {
                 // Cleanup logic goes here
             }
         };
+    }
+
+    private void handleMousePressed(MouseEvent e) {
+        orgSceneX = e.getSceneX();
+        orgSceneY = e.getSceneY();
+        orgTranslateX = this.getTranslateX();
+        orgTranslateY = this.getTranslateY();
+
+        notifyObservers("Seleccionado");
+    }
+
+    private void handleMouseDragged(MouseEvent e) {
+        double offsetX = e.getSceneX() - orgSceneX;
+        double offsetY = e.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+
+        this.setTranslateX(newTranslateX);
+        this.setTranslateY(newTranslateY);
+
+        notifyObservers("Arrastrando...");
+    }
+
+    private void handleMouseReleased(MouseEvent e) {
+        notifyObservers("Arrastre finalizado");
     }
 }

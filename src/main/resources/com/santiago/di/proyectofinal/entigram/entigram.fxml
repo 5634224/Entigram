@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -38,7 +40,7 @@
          <children>
             <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.rowIndex="1">
                <items>
-                  <Button fx:id="btnEntidad" mnemonicParsing="false" onDragDetected="#btnEntidad_onDragDetected">
+                  <Button fx:id="btnEntidad" mnemonicParsing="false" onAction="#btnEntidad_onAction" onDragDetected="#btnEntidad_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,7 +52,7 @@
                         <Tooltip text="Entidad" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnAtributo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onDragDetected="#btnAtributo_onDragDetected">
+                  <Button fx:id="btnAtributo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAtributo_onAction" onDragDetected="#btnAtributo_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,7 +76,7 @@
                         <Tooltip text="Relación" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnRelacion" mnemonicParsing="false" onDragDetected="#btnRelacion_onDragDetected">
+                  <Button fx:id="btnRelacion" mnemonicParsing="false" onAction="#btnRelacion_onAction" onDragDetected="#btnRelacion_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,7 +92,7 @@
             </ToolBar>
             <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <items>
-                  <Button fx:id="btnEntidadDebil" mnemonicParsing="false" onDragDetected="#btnEntidadDebil_onDragDetected">
+                  <Button fx:id="btnEntidadDebil" mnemonicParsing="false" onAction="#btnEntidadDebil_onAction" onDragDetected="#btnEntidadDebil_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -102,7 +104,7 @@
                         <Tooltip text="Entidad" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnAtributoMultivaluado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false">
+                  <Button fx:id="btnAtributoMultivaluado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAtributoMultivaluado_onAction" onDragDetected="#btnAtributoMultivaluado_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -114,7 +116,7 @@
                         <Tooltip text="Atributo" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnAtributoDerivado" layoutX="10.0" layoutY="70.0" mnemonicParsing="false">
+                  <Button fx:id="btnAtributoDerivado" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnAtributoDerivado_onAction" onDragDetected="#btnAtributoDerivado_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -126,7 +128,7 @@
                         <Tooltip text="Relación" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnRelacionDebil" mnemonicParsing="false" onDragDetected="#btnRelacionDebil_onDragDetected">
+                  <Button fx:id="btnRelacionDebil" mnemonicParsing="false" onAction="#btnRelacionDebil_onAction" onDragDetected="#btnRelacionDebil_onDragDetected">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -149,7 +151,7 @@
       </GridPane>
    </left>
    <right>
-      <AnchorPane prefHeight="600.0" prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">
+      <AnchorPane prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">
          <children>
             <Accordion layoutX="3.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <panes>
@@ -182,7 +184,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="back-blue" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="pnLienzo" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" prefHeight="200.0" prefWidth="200.0" styleClass="back-white" />
+            <Pane fx:id="pnLienzo" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" styleClass="back-white" />
          </content>
       </ScrollPane>
    </center>
@@ -198,6 +200,17 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
+                        <MenuItem mnemonicParsing="false" text="Deshacer">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" text="Rehacer">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="Y" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
@@ -210,14 +223,36 @@
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button fx:id="btnDeshacer" mnemonicParsing="false" onAction="#btnDeshacer">
+                     <tooltip>
+                        <Tooltip text="Deshacer" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/deshacer/1x/baseline_undo_black_24dp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnRehacer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRehacer">
+                     <tooltip>
+                        <Tooltip text="Rehacer" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/png/v2/rehacer/1x/baseline_redo_black_24dp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
               </items>
             </ToolBar>
          </children>
       </VBox>
    </top>
    <bottom>
-      <HBox prefHeight="32.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblEstado" text="Herramienta seleccionada" />
          </children>

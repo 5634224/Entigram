@@ -15,7 +15,7 @@ public class MainApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("entigram.fxml"));
 
         // Carga la escena a partir del FXML, y la configura
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 630);
         stage.setTitle("Entigram");
 
         // Carga el controlador de la escena
@@ -27,7 +27,7 @@ public class MainApp extends Application {
 
         // Fija el tamaño minimo de la ventana
         stage.setMinWidth(800);
-        stage.setMinHeight(600);
+        stage.setMinHeight(630);
 
         // Pone la escena dentro del escenario y la muestra
         stage.setScene(scene);

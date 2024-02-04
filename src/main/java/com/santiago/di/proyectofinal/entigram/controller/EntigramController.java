@@ -6,19 +6,17 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EntigramController implements Initializable {
+public class EntigramController implements Initializable, DragObserver {
     /*==================== Atributos ====================*/
     private Escenario escenario;
 
@@ -46,18 +44,22 @@ public class EntigramController implements Initializable {
     private Label lblEstado;
     @FXML
     private Button btnRelacionDebil;
+    @FXML
+    private Button btnDeshacer;
+    @FXML
+    private Button btnRehacer;
 
     /*==================== Métodos ====================*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CustomRectangle rectangulo = new CustomRectangle();
-        rectangulo.setRectangleWidth(100.0);
-        rectangulo.setRectangleHeight(75.0);
-        rectangulo.setLayoutX(50);
-        rectangulo.setLayoutY(50);
-        rectangulo.setLabelText("Entidad");
-
-        pnLienzo.getChildren().add(rectangulo);
+//        CustomRectangle rectangulo = new CustomRectangle();
+//        rectangulo.setRectangleWidth(100.0);
+//        rectangulo.setRectangleHeight(75.0);
+//        rectangulo.setLayoutX(50);
+//        rectangulo.setLayoutY(50);
+//        rectangulo.setLabelText("Entidad");
+//
+//        pnLienzo.getChildren().add(rectangulo);
     }
 
     /**
@@ -74,6 +76,12 @@ public class EntigramController implements Initializable {
 //        prueba[2] = btnLinea;
 //    }
 
+    @FXML
+    public void btnLinea_onAction(ActionEvent actionEvent) {
+        lblEstado.setText("Dibujando línea");
+
+    }
+
     private void onDragDetected(Event event, String tipo) {
         Button miBoton = (Button) event.getSource();
         Dragboard db = miBoton.startDragAndDrop(TransferMode.ANY);
@@ -83,12 +91,6 @@ public class EntigramController implements Initializable {
         db.setContent(content);
 
         event.consume();
-    }
-
-    @FXML
-    public void btnLinea_onAction(ActionEvent actionEvent) {
-        lblEstado.setText("Dibujando línea");
-
     }
 
     @FXML
@@ -122,6 +124,110 @@ public class EntigramController implements Initializable {
     }
 
     @FXML
+    public void btnAtributoMultivaluado_onDragDetected(Event event) {
+        lblEstado.setText("Arrastrando atributo multivaluado");
+        onDragDetected(event, "AtributoMultivaluado");
+    }
+
+    @FXML
+    public void btnAtributoDerivado_onDragDetected(Event event) {
+        lblEstado.setText("Arrastrando atributo derivado");
+        onDragDetected(event, "AtributoDerivado");
+    }
+
+    private void pnLienzo_Entidad_onDragDropped(DragEvent event, Pane miPanel) {
+        CustomRectangle rectangulo = new CustomRectangle();
+        rectangulo.setRectangleWidth(100.0);
+        rectangulo.setRectangleHeight(100.0);
+        rectangulo.setLayoutX(event != null ? event.getX() : 50.0);
+        rectangulo.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(rectangulo);
+
+        rectangulo.addObserver(this);
+        lblEstado.setText("Entidad fuerte insertada");
+    }
+
+    private void pnLienzo_RelacionDebil_onDragDropped(DragEvent event, Pane miPanel) {
+        DoubleRhombus drombo = new DoubleRhombus();
+        drombo.setRhombusWidth(100.0);
+        drombo.setRhombusHeight(50.0);
+        drombo.setLayoutX(event != null ? event.getX() : 50.0);
+        drombo.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(drombo);
+
+        drombo.addObserver(this);
+        lblEstado.setText("Relación débil insertada");
+    }
+
+    private void pnLienzo_Relacion_onDragDropped(DragEvent event, Pane miPanel) {
+        Rhombus rombo = new Rhombus();
+        rombo.setRhombusWidth(100.0);
+        rombo.setRhombusHeight(50.0);
+        rombo.setLayoutX(event != null ? event.getX() : 50.0);
+        rombo.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(rombo);
+
+        rombo.addObserver(this);
+        lblEstado.setText("Relación fuerte insertada");
+    }
+
+    private void pnLienzo_Atributo_onDragDropped(DragEvent event, Pane miPanel) {
+        CustomEllipse elipse = new CustomEllipse();
+        elipse.setEllipseWidth(100.0);
+        elipse.setEllipseHeight(50.0);
+        elipse.setLayoutX(event != null ? event.getX() : 50.0);
+        elipse.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(elipse);
+
+        elipse.addObserver(this);
+        lblEstado.setText("Atributo insertado");
+    }
+
+    private void pnLienzo_EntidadDebil_onDragDropped(DragEvent event, Pane miPanel) {
+        DoubleRectangle drectangulo = new DoubleRectangle();
+        drectangulo.setRectangleWidth(100.0);
+        drectangulo.setRectangleHeight(100.0);
+        drectangulo.setLayoutX(event != null ? event.getX() : 50.0);
+        drectangulo.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(drectangulo);
+
+        drectangulo.addObserver(this);
+        lblEstado.setText("Entidad débil insertada");
+    }
+
+    private void pnLienzo_AtributoMultivaluado_onDragDropped(DragEvent event, Pane miPanel) {
+        DoubleEllipse elipse = new DoubleEllipse();
+        elipse.setEllipseWidth(100.0);
+        elipse.setEllipseHeight(50.0);
+        elipse.setLayoutX(event != null ? event.getX() : 50.0);
+        elipse.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(elipse);
+
+        elipse.addObserver(this);
+        lblEstado.setText("Atributo multivaluado insertado");
+    }
+    private void pnLienzo_AtributoDerivado_onDragDropped(DragEvent event, Pane miPanel) {
+        CustomEllipse elipse = new CustomEllipse();
+        elipse.setEllipseWidth(100.0);
+        elipse.setEllipseHeight(50.0);
+        elipse.setDashedBorder(true);
+
+        elipse.setLayoutX(event != null ? event.getX() : 50.0);
+        elipse.setLayoutY(event != null ? event.getY() : 50.0);
+
+        miPanel.getChildren().add(elipse);
+
+        elipse.addObserver(this);
+        lblEstado.setText("Atributo derivado insertado");
+    }
+
+    @FXML
     public void pnLienzo_onDragOver(DragEvent event) {
         Pane miPanel = (Pane) event.getSource();
         if (event.getGestureSource() != miPanel && event.getDragboard().hasString()) {
@@ -133,68 +239,92 @@ public class EntigramController implements Initializable {
     @FXML
     public void pnLienzo_onDragDropped(DragEvent event) {
         Pane miPanel = (Pane) event.getSource();
-        Dragboard db = event.getDragboard();
+        Dragboard db = event.getDragboard(); // Obtiene el contenido del dragboard (portapapeles de arrastre)
         boolean success = false;
         if (db.hasString()) {
             String tipo = db.getString();
             switch (tipo) {
                 case "Entidad":
-                    CustomRectangle rectangulo = new CustomRectangle();
-                    rectangulo.setRectangleWidth(100.0);
-                    rectangulo.setRectangleHeight(100.0);
-                    rectangulo.setLayoutX(event.getX());
-                    rectangulo.setLayoutY(event.getY());
-
-                    miPanel.getChildren().add(rectangulo);
+                    pnLienzo_Entidad_onDragDropped(event, miPanel);
                     success = true;
                     break;
                 case "EntidadDebil":
-                    DoubleRectangle drectangulo = new DoubleRectangle();
-                    drectangulo.setRectangleWidth(100.0);
-                    drectangulo.setRectangleHeight(100.0);
-                    drectangulo.setLayoutX(event.getX());
-                    drectangulo.setLayoutY(event.getY());
-
-                    miPanel.getChildren().add(drectangulo);
+                    pnLienzo_EntidadDebil_onDragDropped(event, miPanel);
                     success = true;
                     break;
                 case "Atributo":
-                    CustomEllipse elipse = new CustomEllipse();
-                    elipse.setEllipseWidth(100.0);
-                    elipse.setEllipseHeight(50.0);
-                    elipse.setLayoutX(event.getX());
-                    elipse.setLayoutY(event.getY());
-
-                    miPanel.getChildren().add(elipse);
+                    pnLienzo_Atributo_onDragDropped(event, miPanel);
                     success = true;
                     break;
                 case "Relacion":
-                    Rhombus rombo = new Rhombus();
-                    rombo.setRhombusWidth(100.0);
-                    rombo.setRhombusHeight(50.0);
-                    rombo.setLayoutX(event.getX());
-                    rombo.setLayoutY(event.getY());
-
-                    miPanel.getChildren().add(rombo);
+                    pnLienzo_Relacion_onDragDropped(event, miPanel);
                     success = true;
                     break;
                 case "RelacionDebil":
-                    DoubleRhombus drombo = new DoubleRhombus();
-                    drombo.setRhombusWidth(100.0);
-                    drombo.setRhombusHeight(50.0);
-                    drombo.setLayoutX(event.getX());
-                    drombo.setLayoutY(event.getY());
-
-                    miPanel.getChildren().add(drombo);
+                    pnLienzo_RelacionDebil_onDragDropped(event, miPanel);
                     success = true;
                     break;
                 case "AtributoMultivaluado":
+                    pnLienzo_AtributoMultivaluado_onDragDropped(event, miPanel);
+                    success = true;
                     break;
                 case "AtributoDerivado":
+                    pnLienzo_AtributoDerivado_onDragDropped(event, miPanel);
+                    success = true;
                     break;
             }
         }
         event.setDropCompleted(success);
         event.consume();
+    }
+
+    @FXML
+    public void btnDeshacer(ActionEvent actionEvent) {
+        lblEstado.setText("Deshacer");
+    }
+
+    @FXML
+    public void btnRehacer(ActionEvent actionEvent) {
+        lblEstado.setText("Rehacer");
+    }
+
+    @FXML
+    public void btnEntidad_onAction(ActionEvent actionEvent) {
+        pnLienzo_Entidad_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnAtributo_onAction(ActionEvent actionEvent) {
+        pnLienzo_Atributo_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnEntidadDebil_onAction(ActionEvent actionEvent) {
+        pnLienzo_EntidadDebil_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnAtributoDerivado_onAction(ActionEvent actionEvent) {
+        pnLienzo_AtributoDerivado_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnAtributoMultivaluado_onAction(ActionEvent actionEvent) {
+        pnLienzo_AtributoMultivaluado_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnRelacion_onAction(ActionEvent actionEvent) {
+        pnLienzo_Relacion_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnRelacionDebil_onAction(ActionEvent actionEvent) {
+        pnLienzo_RelacionDebil_onDragDropped(null, pnLienzo);
+    }
+
+    @Override
+    public void updateEstado(String estado) {
+        lblEstado.setText(estado);
     }
 }

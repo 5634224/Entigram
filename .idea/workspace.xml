@@ -5,60 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/Escenario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/JavaFXUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomRectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRhombus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/model/Atributo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/model/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/entigram.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v1/atributo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v1/entidad asociativa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v1/entidad debil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v1/entidad fuerte.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v1/flecha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/atributo derivado.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/atributo multivaluado.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/atributo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/entidad asociativa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/entidad debil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/entidad fuerte.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/flecha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/relacion debil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/png/v2/relacion fuerte.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v1/atributo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v1/entidad asociativa.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v1/entidad debil.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v1/entidad fuerte.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v1/flecha.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/atributo derivado.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/atributo multivaluado.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/atributo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/entidad asociativa.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/entidad debil.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/entidad fuerte.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/flecha.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/relacion debil.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/images/svg/v2/relacion fuerte.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DragObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRhombus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRhombus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/entigram.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/entigram.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +27,7 @@
       <list>
         <option value="CSS File" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -177,8 +135,17 @@
       <workItem from="1706920003018" duration="2391000" />
       <workItem from="1706961251132" duration="15724000" />
       <workItem from="1707001047274" duration="20432000" />
-      <workItem from="1707068704947" duration="2832000" />
+      <workItem from="1707068704947" duration="12050000" />
     </task>
+    <task id="LOCAL-00001" summary="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)">
+      <option name="closed" value="true" />
+      <created>1707071932965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707071932965</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

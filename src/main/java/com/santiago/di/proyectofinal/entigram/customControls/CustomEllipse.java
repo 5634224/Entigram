@@ -5,17 +5,26 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.control.SkinBase;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
-public class CustomEllipse extends Control {
+import java.util.ArrayList;
+import java.util.List;
 
+public class CustomEllipse extends Control {
+    private List<DragObserver> observers;
+    private double orgSceneX, orgSceneY;
+    private double orgTranslateX, orgTranslateY;
     private Ellipse ellipse;
     private Label label;
 
     public CustomEllipse() {
         super();
+
+        // Inicializa la lista de observadores
+        observers = new ArrayList<>();
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -35,7 +44,27 @@ public class CustomEllipse extends Control {
         label.setFont(Font.font(14.0));
         label.setTextFill(Color.BLACK);
 
+        // Agregar controladores de eventos de arrastre
+        setOnMousePressed(this::handleMousePressed);
+        setOnMouseDragged(this::handleMouseDragged);
+        setOnMouseReleased(this::handleMouseReleased);
+
+        // Añade los controles al lienzo
         getChildren().addAll(ellipse, label);
+    }
+
+    public void addObserver(DragObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(DragObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers(String mensaje) {
+        for (DragObserver observer : observers) {
+            observer.updateEstado(mensaje);
+        }
     }
 
     @Override
@@ -45,6 +74,7 @@ public class CustomEllipse extends Control {
         ellipse.setRadiusX(getWidth() / 2);
         ellipse.setRadiusY(getHeight() / 2);
 
+        // Centrar el Label en el control
         label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
         label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
     }
@@ -59,7 +89,7 @@ public class CustomEllipse extends Control {
     }
 
     public void setEllipseWidth(double width) {
-        ellipse.setRadiusX(width / 2);
+        setWidth(width);
         requestLayout();
     }
 
@@ -68,7 +98,7 @@ public class CustomEllipse extends Control {
     }
 
     public void setEllipseHeight(double height) {
-        ellipse.setRadiusY(height / 2);
+        setHeight(height);
         requestLayout();
     }
 
@@ -102,5 +132,30 @@ public class CustomEllipse extends Control {
                 // Cleanup logic goes here
             }
         };
+    }
+
+    private void handleMousePressed(MouseEvent e) {
+        orgSceneX = e.getSceneX();
+        orgSceneY = e.getSceneY();
+        orgTranslateX = this.getTranslateX();
+        orgTranslateY = this.getTranslateY();
+
+        notifyObservers("Seleccionado");
+    }
+
+    private void handleMouseDragged(MouseEvent e) {
+        double offsetX = e.getSceneX() - orgSceneX;
+        double offsetY = e.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+
+        this.setTranslateX(newTranslateX);
+        this.setTranslateY(newTranslateY);
+
+        notifyObservers("Arrastrando...");
+    }
+
+    private void handleMouseReleased(MouseEvent e) {
+        notifyObservers("Arrastre finalizado");
     }
 }
