@@ -1,78 +1,54 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class DoubleRectangle extends Control {
-    private List<DragObserver> observers;
-    private double orgSceneX, orgSceneY;
-    private double orgTranslateX, orgTranslateY;
+public class DoubleRectangle extends ArrastrableControl {
+    public static final double STROKE_LINE_WIDTH = 2.0;
     private Rectangle outerRectangle;
     private Rectangle innerRectangle;
-    private Label label;
+    private LabelControl label;
 
-    public DoubleRectangle() {
-        super();
-
-        // Inicializa la lista de observadores
-        observers = new ArrayList<>();
+    public DoubleRectangle(Pane contenedor) {
+        super(contenedor);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
         setHeight(75);
 
-        // Crea un doble rectangulo
-        outerRectangle = new Rectangle();
+        // Crea el rectángulo interior
         innerRectangle = new Rectangle();
+        innerRectangle.setStroke(Color.BLACK); // Sin color de fondo
+        innerRectangle.setFill(Color.WHITE); // Borde negro
+        innerRectangle.setStrokeWidth(STROKE_LINE_WIDTH);
 
-        // Sin color de fondo
-        outerRectangle.setFill(Color.WHITE);
-        innerRectangle.setFill(Color.WHITE);
-
-        // Borde negro
-        outerRectangle.setStroke(Color.BLACK);
-        innerRectangle.setStroke(Color.BLACK);
+        // Crea el rectángulo exterior
+        outerRectangle = new Rectangle();
+        outerRectangle.setFill(Color.WHITE); // Sin color de fondo
+        outerRectangle.setStroke(Color.BLACK); // Borde negro
+        outerRectangle.setStrokeWidth(STROKE_LINE_WIDTH);
 
         // Label
-        label = new Label("Prueba");
-        label.setFont(Font.font(14.0));
-        label.setTextFill(Color.BLACK);
-
-        // Agregar controladores de eventos de arrastre
-        setOnMousePressed(this::handleMousePressed);
-        setOnMouseDragged(this::handleMouseDragged);
-        setOnMouseReleased(this::handleMouseReleased);
+        label = new LabelControl(this, "Prueba");
+        label.get().setFont(Font.font(14.0));
+        label.get().setTextFill(Color.BLACK);
 
         // Añade el rectangulo y el label al control
         getChildren().addAll(outerRectangle, innerRectangle, label);
     }
 
-    public void addObserver(DragObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(DragObserver observer) {
-        observers.remove(observer);
-    }
-
-    private void notifyObservers(String mensaje) {
-        for (DragObserver observer : observers) {
-            observer.updateEstado(mensaje);
-        }
-    }
-
+    /**
+     * Método que define cómo se redimensionarán los componentes del ArrastrableControl cuando este cambie en el lienzo
+     */
     @Override
     public void layoutChildren() {
-        double gap = 3.5; // Define un gap de la decima parte del total del ancho
+        super.layoutChildren();
+        double gap = 5; // Define un gap
 
         // Redimensiona el rectangulo exterior
         outerRectangle.setWidth(getWidth());
@@ -91,7 +67,8 @@ public class DoubleRectangle extends Control {
 
     @Override
     public void resize(double width, double height) {
-        requestLayout();
+//        requestLayout();
+        layoutChildren();
     }
 
     public double getRectangleWidth() {
@@ -113,51 +90,30 @@ public class DoubleRectangle extends Control {
     }
 
     public String getLabelText() {
-        return label.getText();
+        return label.get().getText();
     }
 
     public void setLabelText(String text) {
-        label.setText(text);
+        label.get().setText(text);
         requestLayout();
     }
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new SkinBase<DoubleRectangle>(this) {
-            @Override
-            protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-                // Layout logic goes here
-            }
-
-            @Override
-            public void dispose() {
-                // Cleanup logic goes here
-            }
-        };
+        return new CustomControlSkin(this);
     }
 
-    private void handleMousePressed(MouseEvent e) {
-        orgSceneX = e.getSceneX();
-        orgSceneY = e.getSceneY();
-        orgTranslateX = this.getTranslateX();
-        orgTranslateY = this.getTranslateY();
-
-        notifyObservers("Seleccionado");
+    @Override
+    public void eliminarControlDelContenedor(ActionEvent event) {
+        try {
+            ((Pane) getContenedor()).getChildren().remove(this);
+        } catch (ClassCastException e) {
+            System.out.println("No se puede eliminar el control del contenedor");
+        }
     }
 
-    private void handleMouseDragged(MouseEvent e) {
-        double offsetX = e.getSceneX() - orgSceneX;
-        double offsetY = e.getSceneY() - orgSceneY;
-        double newTranslateX = orgTranslateX + offsetX;
-        double newTranslateY = orgTranslateY + offsetY;
-
-        this.setTranslateX(newTranslateX);
-        this.setTranslateY(newTranslateY);
-
-        notifyObservers("Arrastrando...");
-    }
-
-    private void handleMouseReleased(MouseEvent e) {
-        notifyObservers("Arrastre finalizado");
+    @Override
+    public void editarControl(Event event) {
+        label.editarControl(event);
     }
 }

@@ -25,7 +25,7 @@
      inkscape:document-units="mm"
      inkscape:zoom="2.0485264"
      inkscape:cx="78.349002"
-     inkscape:cy="188.67221"
+     inkscape:cy="110.56728"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1358"
@@ -40,12 +40,12 @@
      id="layer1"
      transform="translate(-27.551998,-43.991119)">
     <rect
-       style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:4.9995;stroke-dasharray:none"
+       style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:11.9998;stroke-dasharray:none"
        id="rect1"
-       width="95.000504"
-       height="95.000496"
-       x="30.051746"
-       y="46.490871" />
+       width="88.00016"
+       height="88.000153"
+       x="33.551899"
+       y="49.99102" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -53,7 +53,7 @@
      inkscape:label="Capa 2">
     <path
        sodipodi:type="star"
-       style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:3.45693;stroke-dasharray:none"
+       style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:9.33357;stroke-dasharray:none"
        id="path1"
        inkscape:flatsided="false"
        sodipodi:sides="2"
@@ -66,6 +66,6 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 51.744511,54.673446 4.6472427,55.107905 -13.668362,11.715737 33.428906,11.281278 Z"
-       transform="matrix(0.98949657,-0.97011361,0.64997768,1.4768569,9.586147,19.445434)" />
+       transform="matrix(0.87955896,-0.86232955,0.57776217,1.3127714,14.076312,22.840184)" />
   </g>
 </svg>

@@ -12,11 +12,13 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EntigramController implements Initializable, DragObserver {
+    public static final double duracionToolTips = 0.1;
     /*==================== Atributos ====================*/
     private Escenario escenario;
 
@@ -48,6 +50,26 @@ public class EntigramController implements Initializable, DragObserver {
     private Button btnDeshacer;
     @FXML
     private Button btnRehacer;
+    @FXML
+    private Tooltip toolTipDeshacer;
+    @FXML
+    private Tooltip toolTipRelacion;
+    @FXML
+    private Tooltip toolTipAtributoMultivaluado;
+    @FXML
+    private Tooltip toolTipAtributo;
+    @FXML
+    private Tooltip toolTipEntidadDebil;
+    @FXML
+    private Tooltip toolTipLineaRelacion;
+    @FXML
+    private Tooltip toolTipEntidad;
+    @FXML
+    private Tooltip toolTipAtributoDerivado;
+    @FXML
+    private Tooltip toolTipRelacionDebil;
+    @FXML
+    private Tooltip toolTipRehacer;
 
     /*==================== Métodos ====================*/
     @Override
@@ -60,6 +82,19 @@ public class EntigramController implements Initializable, DragObserver {
 //        rectangulo.setLabelText("Entidad");
 //
 //        pnLienzo.getChildren().add(rectangulo);
+        prueba();
+
+        // Establece el tiempo de espera para mostrar los tooltips
+        toolTipDeshacer.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipRelacion.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipAtributoMultivaluado.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipAtributo.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipEntidadDebil.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipLineaRelacion.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipEntidad.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipAtributoDerivado.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipRelacionDebil.setShowDelay(Duration.seconds(duracionToolTips));
+        toolTipRehacer.setShowDelay(Duration.seconds(duracionToolTips));
     }
 
     /**
@@ -69,17 +104,29 @@ public class EntigramController implements Initializable, DragObserver {
         this.escenario = escenario;
     }
 
-//    public void prueba() {
-//        Node[] prueba = new Control[10];
-//        prueba[0] = new Rectangle(100.0, 100.0);
-//        prueba[1] = new Label("Hola");
-//        prueba[2] = btnLinea;
-//    }
+    public void prueba() {
+        class pruebita extends Control {
+            Label lbl;
+            public pruebita() {
+                setWidth(100);
+                setHeight(50);
+                lbl = new Label("Hola");
+                getChildren().addAll(lbl);
+            }
 
-    @FXML
-    public void btnLinea_onAction(ActionEvent actionEvent) {
-        lblEstado.setText("Dibujando línea");
+//            @Override
+//            public void resize(double width, double height) {
+//                super.resize(width, height);
+//            }
 
+            @Override
+            protected Skin<?> createDefaultSkin() {
+                return new CustomControlSkin(this);
+            }
+        }
+
+        pruebita pr = new pruebita();
+        pnLienzo.getChildren().addAll(pr);
     }
 
     private void onDragDetected(Event event, String tipo) {
@@ -136,7 +183,7 @@ public class EntigramController implements Initializable, DragObserver {
     }
 
     private void pnLienzo_Entidad_onDragDropped(DragEvent event, Pane miPanel) {
-        CustomRectangle rectangulo = new CustomRectangle();
+        CustomRectangle rectangulo = new CustomRectangle(miPanel);
         rectangulo.setRectangleWidth(100.0);
         rectangulo.setRectangleHeight(100.0);
         rectangulo.setLayoutX(event != null ? event.getX() : 50.0);
@@ -149,12 +196,14 @@ public class EntigramController implements Initializable, DragObserver {
     }
 
     private void pnLienzo_RelacionDebil_onDragDropped(DragEvent event, Pane miPanel) {
-        DoubleRhombus drombo = new DoubleRhombus();
+        // Crea un nuevo rombo
+        DoubleRhombus drombo = new DoubleRhombus(miPanel);
         drombo.setRhombusWidth(100.0);
         drombo.setRhombusHeight(50.0);
         drombo.setLayoutX(event != null ? event.getX() : 50.0);
         drombo.setLayoutY(event != null ? event.getY() : 50.0);
 
+        // Añade el rombo al panel y añade el controlador como observador
         miPanel.getChildren().add(drombo);
 
         drombo.addObserver(this);
@@ -162,22 +211,25 @@ public class EntigramController implements Initializable, DragObserver {
     }
 
     private void pnLienzo_Relacion_onDragDropped(DragEvent event, Pane miPanel) {
-        Rhombus rombo = new Rhombus();
+        // Crea un nuevo rombo
+        Rhombus rombo = new Rhombus(miPanel);
         rombo.setRhombusWidth(100.0);
         rombo.setRhombusHeight(50.0);
         rombo.setLayoutX(event != null ? event.getX() : 50.0);
         rombo.setLayoutY(event != null ? event.getY() : 50.0);
 
+        // Añade el rombo al panel y añade el controlador como observador
         miPanel.getChildren().add(rombo);
-
         rombo.addObserver(this);
+
+        // Actualiza el estado
         lblEstado.setText("Relación fuerte insertada");
     }
 
     private void pnLienzo_Atributo_onDragDropped(DragEvent event, Pane miPanel) {
-        CustomEllipse elipse = new CustomEllipse();
-        elipse.setEllipseWidth(100.0);
-        elipse.setEllipseHeight(50.0);
+        CustomEllipse elipse = new CustomEllipse(miPanel);
+//        elipse.setEllipseWidth(100.0);
+//        elipse.setEllipseHeight(50.0);
         elipse.setLayoutX(event != null ? event.getX() : 50.0);
         elipse.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -188,7 +240,7 @@ public class EntigramController implements Initializable, DragObserver {
     }
 
     private void pnLienzo_EntidadDebil_onDragDropped(DragEvent event, Pane miPanel) {
-        DoubleRectangle drectangulo = new DoubleRectangle();
+        DoubleRectangle drectangulo = new DoubleRectangle(miPanel);
         drectangulo.setRectangleWidth(100.0);
         drectangulo.setRectangleHeight(100.0);
         drectangulo.setLayoutX(event != null ? event.getX() : 50.0);
@@ -201,7 +253,7 @@ public class EntigramController implements Initializable, DragObserver {
     }
 
     private void pnLienzo_AtributoMultivaluado_onDragDropped(DragEvent event, Pane miPanel) {
-        DoubleEllipse elipse = new DoubleEllipse();
+        DoubleEllipse elipse = new DoubleEllipse(miPanel);
         elipse.setEllipseWidth(100.0);
         elipse.setEllipseHeight(50.0);
         elipse.setLayoutX(event != null ? event.getX() : 50.0);
@@ -213,7 +265,7 @@ public class EntigramController implements Initializable, DragObserver {
         lblEstado.setText("Atributo multivaluado insertado");
     }
     private void pnLienzo_AtributoDerivado_onDragDropped(DragEvent event, Pane miPanel) {
-        CustomEllipse elipse = new CustomEllipse();
+        CustomEllipse elipse = new CustomEllipse(miPanel);
         elipse.setEllipseWidth(100.0);
         elipse.setEllipseHeight(50.0);
         elipse.setDashedBorder(true);
@@ -239,6 +291,7 @@ public class EntigramController implements Initializable, DragObserver {
     @FXML
     public void pnLienzo_onDragDropped(DragEvent event) {
         Pane miPanel = (Pane) event.getSource();
+//        System.out.println(miPanel == pnLienzo);
         Dragboard db = event.getDragboard(); // Obtiene el contenido del dragboard (portapapeles de arrastre)
         boolean success = false;
         if (db.hasString()) {
@@ -291,6 +344,23 @@ public class EntigramController implements Initializable, DragObserver {
     @FXML
     public void btnEntidad_onAction(ActionEvent actionEvent) {
         pnLienzo_Entidad_onDragDropped(null, pnLienzo);
+    }
+
+    @FXML
+    public void btnLinea_onAction(ActionEvent actionEvent) {
+        LabelControl label = new LabelControl(pnLienzo);
+//        label.setLabelWidth(100.0);
+//        label.setLabelHeight(50.0);
+        label.get().setText("Línea");
+
+        label.setLayoutX(50.0);
+        label.setLayoutY(50.0);
+
+        pnLienzo.getChildren().add(label);
+
+//        label.addObserver(this);
+
+        lblEstado.setText("Dibujando línea");
     }
 
     @FXML

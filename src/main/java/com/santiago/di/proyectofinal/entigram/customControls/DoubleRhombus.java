@@ -1,73 +1,42 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class DoubleRhombus extends Control {
-    private List<DragObserver> observers;
-    private double orgSceneX, orgSceneY;
-    private double orgTranslateX, orgTranslateY;
+public class DoubleRhombus extends ArrastrableControl {
     private Polygon outerPolygon;
     private Polygon innerPolygon;
-    private Label label;
+    private LabelControl label;
 
-    public DoubleRhombus() {
-        super();
-
-        // Inicializa la lista de observadores
-        observers = new ArrayList<>();
+    public DoubleRhombus(Pane contenedor) {
+        super(contenedor);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
         setHeight(50);
 
-        // Crea un rombo doble
-        outerPolygon = new Polygon();
+        // Crea el rombo interior
         innerPolygon = new Polygon();
+        innerPolygon.setFill(Color.WHITE); // Sin color de fondo
+        innerPolygon.setStroke(Color.BLACK); // Borde negro
 
-        // Sin color de fondo
-        outerPolygon.setFill(Color.WHITE);
-        innerPolygon.setFill(Color.WHITE);
-
-        // Borde negro
-        outerPolygon.setStroke(Color.BLACK);
-        innerPolygon.setStroke(Color.BLACK);
+        // Crea el rombo exterior
+        outerPolygon = new Polygon();
+        outerPolygon.setFill(Color.WHITE); // Sin color de fondo
+        outerPolygon.setStroke(Color.BLACK); // Borde negro
 
         // Label
-        label = new Label("Prueba");
-        label.setFont(Font.font(14.0));
-        label.setTextFill(Color.BLACK);
-
-        // Agregar controladores de eventos de arrastre
-        setOnMousePressed(this::handleMousePressed);
-        setOnMouseDragged(this::handleMouseDragged);
-        setOnMouseReleased(this::handleMouseReleased);
+        label = new LabelControl(contenedor,"Prueba");
+        label.get().setFont(Font.font(14.0));
+        label.get().setTextFill(Color.BLACK);
 
         // Añade el rectangulo y el label al control
         getChildren().addAll(outerPolygon, innerPolygon, label);
-    }
-
-    public void addObserver(DragObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(DragObserver observer) {
-        observers.remove(observer);
-    }
-
-    private void notifyObservers(String mensaje) {
-        for (DragObserver observer : observers) {
-            observer.updateEstado(mensaje);
-        }
     }
 
     @Override
@@ -122,51 +91,30 @@ public class DoubleRhombus extends Control {
     }
 
     public String getLabelText() {
-        return label.getText();
+        return label.get().getText();
     }
 
     public void setLabelText(String text) {
-        label.setText(text);
+        label.get().setText(text);
         requestLayout();
     }
 
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new SkinBase<DoubleRhombus>(this) {
-            @Override
-            protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-                // Layout logic goes here
-            }
-
-            @Override
-            public void dispose() {
-                // Cleanup logic goes here
-            }
-        };
+        return new CustomControlSkin(this);
     }
 
-    private void handleMousePressed(MouseEvent e) {
-        orgSceneX = e.getSceneX();
-        orgSceneY = e.getSceneY();
-        orgTranslateX = this.getTranslateX();
-        orgTranslateY = this.getTranslateY();
-
-        notifyObservers("Seleccionado");
+    @Override
+    public void eliminarControlDelContenedor(ActionEvent event) {
+        try {
+            ((Pane) getContenedor()).getChildren().remove(this);
+        } catch (ClassCastException e) {
+            System.out.println("No se puede eliminar el control del contenedor");
+        }
     }
 
-    private void handleMouseDragged(MouseEvent e) {
-        double offsetX = e.getSceneX() - orgSceneX;
-        double offsetY = e.getSceneY() - orgSceneY;
-        double newTranslateX = orgTranslateX + offsetX;
-        double newTranslateY = orgTranslateY + offsetY;
-
-        this.setTranslateX(newTranslateX);
-        this.setTranslateY(newTranslateY);
-
-        notifyObservers("Arrastrando...");
-    }
-
-    private void handleMouseReleased(MouseEvent e) {
-        notifyObservers("Arrastre finalizado");
+    @Override
+    public void editarControl(Event event) {
+        label.editarControl(event);
     }
 }

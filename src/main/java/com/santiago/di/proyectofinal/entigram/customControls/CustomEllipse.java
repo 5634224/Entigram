@@ -1,30 +1,21 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CustomEllipse extends Control {
-    private List<DragObserver> observers;
-    private double orgSceneX, orgSceneY;
-    private double orgTranslateX, orgTranslateY;
+public class CustomEllipse extends ArrastrableControl {
     private Ellipse ellipse;
-    private Label label;
+    private LabelControl label;
 
-    public CustomEllipse() {
-        super();
-
-        // Inicializa la lista de observadores
-        observers = new ArrayList<>();
+    public CustomEllipse(Pane contenedor) {
+        super(contenedor);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -32,57 +23,48 @@ public class CustomEllipse extends Control {
 
         // Crea una elipse
         ellipse = new Ellipse();
-
-        // Sin color de fondo
-        ellipse.setFill(Color.WHITE);
-
-        // Borde negro
-        ellipse.setStroke(Color.BLACK);
+        ellipse.setFill(Color.WHITE); // Sin color de fondo
+        ellipse.setStroke(Color.BLACK); // Borde negro
 
         // Label
-        label = new Label("Prueba");
-        label.setFont(Font.font(14.0));
-        label.setTextFill(Color.BLACK);
+        label = new LabelControl(contenedor, "Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nAdiooooooooooooooooooooooooos\nOtra cosa mássssssssss\nJajajaaaaaaaaaaaaaaaaaaaaa");
+        label.get().setFont(Font.font(14.0));
+        label.get().setTextAlignment(TextAlignment.CENTER);
+        label.get().setTextFill(Color.BLACK);
+//        label.setLayoutX(0);
+//        label.setLayoutY(0);
 
-        // Agregar controladores de eventos de arrastre
-        setOnMousePressed(this::handleMousePressed);
-        setOnMouseDragged(this::handleMouseDragged);
-        setOnMouseReleased(this::handleMouseReleased);
+        // Vincular el tamaño de la elipse al tamaño del texto del Label
+        ellipse.radiusXProperty().bind(label.widthProperty().divide(1.5).add(20)); // Ajusta según el ancho del texto del Label
+        ellipse.radiusYProperty().bind(label.heightProperty().divide(1.5).add(10)); // Ajusta según la altura del texto del Label
+
+        // Posicionar el Label en el centro de la elipse
+//        label.layoutXProperty().bind(ellipse.centerXProperty().subtract(label.widthProperty().divide(2)));
+//        label.layoutYProperty().bind(ellipse.centerYProperty().subtract(label.heightProperty().divide(2)));
 
         // Añade los controles al lienzo
         getChildren().addAll(ellipse, label);
     }
 
-    public void addObserver(DragObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(DragObserver observer) {
-        observers.remove(observer);
-    }
-
-    private void notifyObservers(String mensaje) {
-        for (DragObserver observer : observers) {
-            observer.updateEstado(mensaje);
-        }
-    }
-
-    @Override
-    public void layoutChildren() {
-        ellipse.setCenterX(getWidth() / 2);
-        ellipse.setCenterY(getHeight() / 2);
-        ellipse.setRadiusX(getWidth() / 2);
-        ellipse.setRadiusY(getHeight() / 2);
-
-        // Centrar el Label en el control
-        label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
-        label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
-    }
-
-    @Override
-    public void resize(double width, double height) {
-        requestLayout();
-    }
+//    @Override
+//    public void layoutChildren() {
+//        super.layoutChildren();
+//        ellipse.setCenterX(getWidth() / 2);
+//        ellipse.setCenterY(getHeight() / 2);
+//        ellipse.setRadiusX(getWidth() / 2);
+//        ellipse.setRadiusY(getHeight() / 2);
+////
+////        // Centrar el Label en el control
+////        label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
+////        label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
+//    }
+//
+//    @Override
+//    public void resize(double width, double height) {
+////        super.resize(width, height);
+////        requestLayout();
+//        layoutChildren();
+//    }
 
     public double getEllipseWidth() {
         return ellipse.getRadiusX() * 2;
@@ -103,11 +85,11 @@ public class CustomEllipse extends Control {
     }
 
     public String getLabelText() {
-        return label.getText();
+        return label.get().getText();
     }
 
     public void setLabelText(String text) {
-        label.setText(text);
+        label.get().setText(text);
         requestLayout();
     }
 
@@ -120,42 +102,22 @@ public class CustomEllipse extends Control {
     }
 
     @Override
+    public void eliminarControlDelContenedor(ActionEvent event) {
+        try {
+            ((Pane) getContenedor()).getChildren().remove(this);
+        } catch (ClassCastException e) {
+            System.err.println("No se puede eliminar el control del contenedor");
+        }
+    }
+
+    @Override
+    public void editarControl(Event event) {
+        label.editarControl(event);
+    }
+
+    @Override
     protected Skin<?> createDefaultSkin() {
-        return new SkinBase<CustomEllipse>(this) {
-            @Override
-            protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-                // Layout logic goes here
-            }
-
-            @Override
-            public void dispose() {
-                // Cleanup logic goes here
-            }
-        };
+        return new CustomControlSkin(this);
     }
 
-    private void handleMousePressed(MouseEvent e) {
-        orgSceneX = e.getSceneX();
-        orgSceneY = e.getSceneY();
-        orgTranslateX = this.getTranslateX();
-        orgTranslateY = this.getTranslateY();
-
-        notifyObservers("Seleccionado");
-    }
-
-    private void handleMouseDragged(MouseEvent e) {
-        double offsetX = e.getSceneX() - orgSceneX;
-        double offsetY = e.getSceneY() - orgSceneY;
-        double newTranslateX = orgTranslateX + offsetX;
-        double newTranslateY = orgTranslateY + offsetY;
-
-        this.setTranslateX(newTranslateX);
-        this.setTranslateY(newTranslateY);
-
-        notifyObservers("Arrastrando...");
-    }
-
-    private void handleMouseReleased(MouseEvent e) {
-        notifyObservers("Arrastre finalizado");
-    }
 }

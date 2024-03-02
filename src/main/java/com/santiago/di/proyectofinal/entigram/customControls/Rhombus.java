@@ -1,29 +1,25 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
-import javafx.scene.control.Control;
+import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
-public class Rhombus extends Control {
-    private List<DragObserver> observers;
-    private double orgSceneX, orgSceneY;
-    private double orgTranslateX, orgTranslateY;
+public class Rhombus extends ArrastrableControl {
+    public static final double STROKE_LINE_WIDTH = 2.0;
     private Polygon polygon;
     private Label label;
 
-    public Rhombus() {
-        super();
-
-        // Inicializa la lista de observadores
-        observers = new ArrayList<>();
+    public Rhombus(Pane contenedor) {
+        super(contenedor);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -31,44 +27,42 @@ public class Rhombus extends Control {
 
         // Crea un rombo
         polygon = new Polygon();
-
-        // Sin color de fondo
-        polygon.setFill(Color.WHITE);
-
-        // Borde negro
-        polygon.setStroke(Color.BLACK);
+        polygon.setFill(Color.WHITE); // Sin color de fondo
+        polygon.setStroke(Color.BLACK); // Borde negro
+        polygon.setStrokeWidth(STROKE_LINE_WIDTH);
 
         // Label
-        label = new Label("Prueba");
+        label = new Label();
+        label.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaa\nPruebitaaaaaaaaaaaaaaaaaaaa");
         label.setFont(Font.font(14.0));
+        label.setTextAlignment(TextAlignment.CENTER);
         label.setTextFill(Color.BLACK);
 
-        // Agregar controladores de eventos de arrastre
-        setOnMousePressed(this::handleMousePressed);
-        setOnMouseDragged(this::handleMouseDragged);
-        setOnMouseReleased(this::handleMouseReleased);
+        // Vincular el tamaño del rombo al tamaño del texto del Label
+        label.widthProperty().addListener((obs, oldVal, newVal) -> {
+            setRhombusWidth(newVal.doubleValue() * 1.8 + 20);
+//            requestLayout();
+            layoutChildren();
+        });
 
-        // Añade el rectangulo y el label al control
+        label.heightProperty().addListener((obs, oldVal, newVal) -> {
+            setRhombusHeight(newVal.doubleValue() * 1.8 + 10);
+//            requestLayout();
+            layoutChildren();
+        });
+
+        // Añade el rombo y el label al control
         getChildren().addAll(polygon, label);
-    }
+//        label.setLayoutX(25);
+//        label.setLayoutY(0);
 
-    public void addObserver(DragObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(DragObserver observer) {
-        observers.remove(observer);
-    }
-
-    private void notifyObservers(String mensaje) {
-        for (DragObserver observer : observers) {
-            observer.updateEstado(mensaje);
-        }
+        layoutChildren();
     }
 
     @Override
     public void layoutChildren() {
-        // Dibuja el rombo
+        super.layoutChildren();
+//        // Dibuja el rombo
         polygon.getPoints().clear();
         polygon.getPoints().addAll(
             getWidth() / 2, 0.0,
@@ -76,16 +70,24 @@ public class Rhombus extends Control {
             getWidth() / 2, getHeight(),
             0.0, getHeight() / 2
         );
-
-        // Centra el label dentro del rombo
+//        // Centra el label dentro del rombo
         label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
         label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
+//        System.out.println(label.getLayoutX() + " " + label.getLayoutY());
+//        System.out.println(label.getWidth() + " " + label.getHeight());
+//        System.out.println(label.get().getLayoutX() + " " + label.get().getLayoutY());
+//        System.out.println(label.get().getWidth() + " " + label.get().getHeight());
+//        requestLayout();
+//        System.out.println(label.getLayoutX());
+//        System.out.println(label.getLayoutY());
     }
 
     @Override
     public void resize(double width, double height) {
         // Actualiza el tamaño del rombo
-        requestLayout();
+//        super.resize(width, height);
+//        requestLayout();
+        layoutChildren();
     }
 
     public double getRhombusWidth() {
@@ -116,42 +118,23 @@ public class Rhombus extends Control {
     }
 
     @Override
+    public void eliminarControlDelContenedor(ActionEvent event) {
+        try {
+            ((Pane) getContenedor()).getChildren().remove(this);
+        } catch (ClassCastException e) {
+            System.out.println("No se puede eliminar el control del contenedor");
+        }
+    }
+
+    @Override
+    public void editarControl(Event event) {
+//        label.editarControl(event);
+        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
+        cadena.ifPresent(s -> label.setText(s));
+    }
+
+    @Override
     protected Skin<?> createDefaultSkin() {
-        return new SkinBase<Rhombus>(this) {
-            @Override
-            protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-                // Layout logic goes here
-            }
-
-            @Override
-            public void dispose() {
-                // Cleanup logic goes here
-            }
-        };
-    }
-
-    private void handleMousePressed(MouseEvent e) {
-        orgSceneX = e.getSceneX();
-        orgSceneY = e.getSceneY();
-        orgTranslateX = this.getTranslateX();
-        orgTranslateY = this.getTranslateY();
-
-        notifyObservers("Seleccionado");
-    }
-
-    private void handleMouseDragged(MouseEvent e) {
-        double offsetX = e.getSceneX() - orgSceneX;
-        double offsetY = e.getSceneY() - orgSceneY;
-        double newTranslateX = orgTranslateX + offsetX;
-        double newTranslateY = orgTranslateY + offsetY;
-
-        this.setTranslateX(newTranslateX);
-        this.setTranslateY(newTranslateY);
-
-        notifyObservers("Arrastrando...");
-    }
-
-    private void handleMouseReleased(MouseEvent e) {
-        notifyObservers("Arrastre finalizado");
+        return new CustomControlSkin(this);
     }
 }

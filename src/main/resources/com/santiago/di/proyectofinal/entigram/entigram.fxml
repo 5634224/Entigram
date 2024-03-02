@@ -19,136 +19,123 @@
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.santiago.di.proyectofinal.entigram.controller.EntigramController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="60.0" minWidth="60.0" prefHeight="600.0" prefWidth="800.0" styleClass="fuente" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.santiago.di.proyectofinal.entigram.controller.EntigramController">
    <left>
-      <GridPane prefWidth="100.0" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.0" minWidth="10.0" prefWidth="42.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="10.0" prefWidth="42.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="198.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="560.0" minHeight="10.0" prefHeight="498.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.rowIndex="1">
-               <items>
-                  <Button fx:id="btnEntidad" mnemonicParsing="false" onAction="#btnEntidad_onAction" onDragDetected="#btnEntidad_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/entidad%20fuerte.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Entidad" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnAtributo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAtributo_onAction" onDragDetected="#btnAtributo_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/atributo.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Atributo" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnLinea" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnLinea_onAction">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/flecha.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Relación" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnRelacion" mnemonicParsing="false" onAction="#btnRelacion_onAction" onDragDetected="#btnRelacion_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/relacion%20fuerte.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Relación" />
-                     </tooltip>
-                  </Button>
-               </items>
-            </ToolBar>
-            <ToolBar orientation="VERTICAL" styleClass="back-grey" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <items>
-                  <Button fx:id="btnEntidadDebil" mnemonicParsing="false" onAction="#btnEntidadDebil_onAction" onDragDetected="#btnEntidadDebil_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/entidad%20debil.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Entidad" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnAtributoMultivaluado" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAtributoMultivaluado_onAction" onDragDetected="#btnAtributoMultivaluado_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/atributo%20multivaluado.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Atributo" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnAtributoDerivado" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnAtributoDerivado_onAction" onDragDetected="#btnAtributoDerivado_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/atributo%20derivado.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Relación" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="btnRelacionDebil" mnemonicParsing="false" onAction="#btnRelacionDebil_onAction" onDragDetected="#btnRelacionDebil_onDragDetected">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/relacion%20debil.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Relación" />
-                     </tooltip>
-                  </Button>
-               </items>
-            </ToolBar>
-            <AnchorPane styleClass="back-grey" GridPane.columnSpan="2">
+      <ScrollPane prefWidth="100.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane prefHeight="538.0">
                <children>
-                  <Label layoutX="5.0" layoutY="14.0" text="Componentes" />
+                  <VBox spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Button fx:id="btnEntidad" mnemonicParsing="false" onAction="#btnEntidad_onAction" onDragDetected="#btnEntidad_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/entidad%20fuerte.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipEntidad" text="Entidad" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnAtributo" mnemonicParsing="false" onAction="#btnAtributo_onAction" onDragDetected="#btnAtributo_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/atributo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipAtributo" text="Atributo" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnLinea" mnemonicParsing="false" onAction="#btnLinea_onAction" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/flecha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipLineaRelacion" text="Relación" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnRelacion" mnemonicParsing="false" onAction="#btnRelacion_onAction" onDragDetected="#btnRelacion_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/relacion%20fuerte.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipRelacion" text="Relación" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnEntidadDebil" mnemonicParsing="false" onAction="#btnEntidadDebil_onAction" onDragDetected="#btnEntidadDebil_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/entidad%20debil.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipEntidadDebil" text="Entidad débil" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnAtributoMultivaluado" mnemonicParsing="false" onAction="#btnAtributoMultivaluado_onAction" onDragDetected="#btnAtributoMultivaluado_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/atributo%20multivaluado.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipAtributoMultivaluado" text="Atributo multivaluado" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnAtributoDerivado" mnemonicParsing="false" onAction="#btnAtributoDerivado_onAction" onDragDetected="#btnAtributoDerivado_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/atributo%20derivado.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipAtributoDerivado" text="Atributo derivado" />
+                           </tooltip>
+                        </Button>
+                        <Button fx:id="btnRelacionDebil" mnemonicParsing="false" onAction="#btnRelacionDebil_onAction" onDragDetected="#btnRelacionDebil_onDragDetected" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/png/v2/relacion%20debil.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip fx:id="toolTipRelacionDebil" text="Relación débil" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
                </children>
             </AnchorPane>
-         </children>
-      </GridPane>
+         </content>
+      </ScrollPane>
    </left>
    <right>
       <AnchorPane prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">
@@ -167,12 +154,7 @@
                         </AnchorPane>
                   </content>
                 </TitledPane>
-                <TitledPane animated="false" text="untitled">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane animated="false" text="Documento">
+                <TitledPane animated="false" expanded="false" text="Documento">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
@@ -225,7 +207,7 @@
               <items>
                 <Button fx:id="btnDeshacer" mnemonicParsing="false" onAction="#btnDeshacer">
                      <tooltip>
-                        <Tooltip text="Deshacer" />
+                        <Tooltip fx:id="toolTipDeshacer" text="Deshacer" />
                      </tooltip>
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -236,7 +218,7 @@
                      </graphic></Button>
                   <Button fx:id="btnRehacer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRehacer">
                      <tooltip>
-                        <Tooltip text="Rehacer" />
+                        <Tooltip fx:id="toolTipRehacer" text="Rehacer" />
                      </tooltip>
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -252,7 +234,7 @@
       </VBox>
    </top>
    <bottom>
-      <HBox spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox fillHeight="false" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblEstado" text="Herramienta seleccionada" />
          </children>

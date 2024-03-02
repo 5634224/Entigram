@@ -1,4 +1,8 @@
 /* CSS JavaFX */
+.fuente {
+    -fx-font-family: "Arial";
+}
+
 .back-grey
 {
     -fx-background-color: #e2e2e2;
