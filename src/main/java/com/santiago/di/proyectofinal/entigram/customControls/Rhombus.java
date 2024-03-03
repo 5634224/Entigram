@@ -45,6 +45,7 @@ public class Rhombus extends ArrastrableControl {
             layoutChildren();
         });
 
+
         label.heightProperty().addListener((obs, oldVal, newVal) -> {
             setRhombusHeight(newVal.doubleValue() * 1.8 + 10);
 //            requestLayout();
@@ -55,7 +56,7 @@ public class Rhombus extends ArrastrableControl {
         getChildren().addAll(polygon, label);
 //        label.setLayoutX(25);
 //        label.setLayoutY(0);
-
+        requestLayout();
         layoutChildren();
     }
 

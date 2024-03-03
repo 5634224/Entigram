@@ -25,7 +25,7 @@ public class CustomRectangle extends ArrastrableControl {
         customRectangle.setStroke(Color.BLACK); // Borde negro
 
         // Label
-        label = new LabelControl(contenedor,"Prueba");
+        label = new LabelControl(this,"Prueba");
         label.get().setFont(Font.font(14.0));
         label.get().setTextFill(Color.BLACK);
 

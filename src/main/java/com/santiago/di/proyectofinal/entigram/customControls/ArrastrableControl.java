@@ -1,5 +1,6 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Parent;
 import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
@@ -72,7 +73,21 @@ public abstract class ArrastrableControl extends CustomControl<Pane> implements 
             this.setTranslateX(newTranslateX);
             this.setTranslateY(newTranslateY);
             notifyObservers("Arrastrando...");
+
+            ChangeListener<Number> layoutListener = (obs, oldVal, newVal) -> {
+                double padding = 50.0; // Espacio adicional para añadir alrededor del componente
+                if (newVal.doubleValue() + padding > getContenedor().getWidth()) {
+                    getContenedor().setPrefWidth(newVal.doubleValue() + padding);
+                }
+                if (newVal.doubleValue() + padding > getContenedor().getHeight()) {
+                    getContenedor().setPrefHeight(newVal.doubleValue() + padding);
+                }
+            };
         }
+    }
+
+    private void layoutListener() {
+        this.layoutChildren();
     }
 
     private void handleMouseReleased(MouseEvent e) {

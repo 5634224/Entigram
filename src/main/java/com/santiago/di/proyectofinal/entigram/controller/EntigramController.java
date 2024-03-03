@@ -348,10 +348,10 @@ public class EntigramController implements Initializable, DragObserver {
 
     @FXML
     public void btnLinea_onAction(ActionEvent actionEvent) {
-        LabelControl label = new LabelControl(pnLienzo);
-//        label.setLabelWidth(100.0);
-//        label.setLabelHeight(50.0);
-        label.get().setText("Línea");
+        LabelControl label = new LabelControl(pnLienzo, "Línea");
+        label.setLabelWidth(200.0);
+        label.setLabelHeight(50.0);
+//        label.get().setText("Línea");
 
         label.setLayoutX(50.0);
         label.setLayoutY(50.0);

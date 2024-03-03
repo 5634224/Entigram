@@ -7,6 +7,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Skin;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -34,17 +35,9 @@ public abstract class CustomControl<T extends Parent> extends Control {
     }
 
     private void onMouseClicked(MouseEvent event) {
-        if (event.isSecondaryButtonDown()) {
+        if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Hizo clic derecho");
             rightClickMenu.show(this, event.getScreenX(), event.getScreenY());
-            // Por qué no se está mostrando el rightClickMenu? Porque el control no tiene un contenedor
-            // Cómo se soluciona? Se debe establecer el contenedor del control
-            // Y cómo se hace eso? Se debe crear un método setContenedor en la clase CustomControl
-            // Y cómo se llama ese método? setContenedor
-            // Y qué debo hacer dentro del método setContenedor? Asignar el contenedor al atributo contenedor
-            // Y cómo se hace eso? this.contenedor = contenedor;
-            // Pero eso ya lo hago en el constructor, no? Sí, pero el contenedor puede cambiar
-
         } else if (event.getClickCount() == 2) {
             editarControl(event);
         }

@@ -25,20 +25,26 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
 //        label.layoutXProperty().bind(this.layoutXProperty());
 //        label.layoutYProperty().bind(this.layoutYProperty());
 
-        label.layoutXProperty().addListener((obs, oldVal, newVal) -> {
+//        label.layoutXProperty().addListener((obs, oldVal, newVal) -> {
 //            this.setLayoutX(newVal.doubleValue());
-//            label.setLayoutX(0);
-            System.out.println("LayoutX: " + newVal.doubleValue() + " - " + this.getLayoutX());
-        });
-        label.layoutYProperty().addListener((obs, oldVal, newVal) -> {
+////            label.setLayoutX(0);
+//            System.out.println("LayoutX: " + newVal.doubleValue() + " - " + this.getLayoutX());
+//        });
+//        label.layoutYProperty().addListener((obs, oldVal, newVal) -> {
 //            this.setLayoutY(newVal.doubleValue());
-//            label.setLayoutY(0);
-            System.out.println("LayoutY: " + newVal.doubleValue() + " - " + this.getLayoutY());
-        });
-//        label.prefWidthProperty().bind(this.widthProperty());
+////            label.setLayoutY(0);
+//            System.out.println("LayoutY: " + newVal.doubleValue() + " - " + this.getLayoutY());
+//        });
+
+//        label.widthProperty().bind(this.widthProperty());
 //        label.prefHeightProperty().bind(this.heightProperty());
 
+        System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
+        System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
+
+
         getChildren().add(label);
+        layoutChildren();
         setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 1px;");
 
 
@@ -61,7 +67,7 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
 
     public void setLabelWidth(double width) {
         setWidth(width);
-        requestLayout();
+//        requestLayout();
     }
 
     public double getLabelHeight() {
@@ -70,7 +76,7 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
 
     public void setLabelHeight(double height) {
         setHeight(height);
-        requestLayout();
+//        requestLayout();
     }
 
     @Override
@@ -86,6 +92,8 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
     public void editarControl(Event event) {
         Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
         cadena.ifPresent(s -> label.setText(s));
+        System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
+        System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
     }
 
     @Override
