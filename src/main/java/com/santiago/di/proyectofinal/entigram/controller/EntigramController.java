@@ -82,7 +82,7 @@ public class EntigramController implements Initializable, DragObserver {
 //        rectangulo.setLabelText("Entidad");
 //
 //        pnLienzo.getChildren().add(rectangulo);
-        prueba();
+//        prueba();
 
         // Establece el tiempo de espera para mostrar los tooltips
         toolTipDeshacer.setShowDelay(Duration.seconds(duracionToolTips));
@@ -213,8 +213,8 @@ public class EntigramController implements Initializable, DragObserver {
     private void pnLienzo_Relacion_onDragDropped(DragEvent event, Pane miPanel) {
         // Crea un nuevo rombo
         Rhombus rombo = new Rhombus(miPanel);
-        rombo.setRhombusWidth(100.0);
-        rombo.setRhombusHeight(50.0);
+        rombo.setPrefWidth(100.0);
+        rombo.setPrefHeight(50.0);
         rombo.setLayoutX(event != null ? event.getX() : 50.0);
         rombo.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -349,8 +349,8 @@ public class EntigramController implements Initializable, DragObserver {
     @FXML
     public void btnLinea_onAction(ActionEvent actionEvent) {
         LabelControl label = new LabelControl(pnLienzo, "Línea");
-        label.setLabelWidth(200.0);
-        label.setLabelHeight(50.0);
+//        label.setLabelWidth(200.0);
+//        label.setLabelHeight(50.0);
 //        label.get().setText("Línea");
 
         label.setLayoutX(50.0);

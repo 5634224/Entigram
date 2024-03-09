@@ -36,21 +36,29 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
 //            System.out.println("LayoutY: " + newVal.doubleValue() + " - " + this.getLayoutY());
 //        });
 
-//        label.widthProperty().bind(this.widthProperty());
+//        label.widthProperty().addListener((obs, oldVal, newVal) -> {
+//            setWidth(newVal.doubleValue());
+//            System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
+//            System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
+//        });
+//        label.heightProperty().addListener((obs, oldVal, newVal) -> {
+//            setHeight(newVal.doubleValue());
+//            System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
+//            System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
+//        });
+
+
+//        label.prefWidthProperty().bind(this.widthProperty());
 //        label.prefHeightProperty().bind(this.heightProperty());
 
-        System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
-        System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
+//        System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
+//        System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
 
 
         getChildren().add(label);
+        setStyle("-fx-background-color: yellow;");
+//        setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 1px;");
         layoutChildren();
-        setStyle("-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 1px;");
-
-
-        // Por qué no se está aplicando el setStyle? Porque el label ocupa todo el espacio del control
-        // Pero se debería ver al menos el borde, no? Sí, pero no se está aplicando el estilo
-        // Y cómo se aplica correctamente? Se debe aplicar el estilo al label, no al control
     }
 
     public LabelControl(T panelContenedor) {
@@ -94,6 +102,11 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
         cadena.ifPresent(s -> label.setText(s));
         System.out.println("LabelControl: " + getWidth() + " <-> " + getHeight());
         System.out.println("Label: " + label.getWidth() + " <-> " + label.getHeight());
+    }
+
+    @Override
+    public void layoutChildren() {
+        super.layoutChildren();
     }
 
     @Override

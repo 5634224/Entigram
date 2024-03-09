@@ -164,7 +164,7 @@
          </children></AnchorPane>
    </right>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="back-blue" BorderPane.alignment="CENTER">
+      <ScrollPane styleClass="back-blue" BorderPane.alignment="CENTER">
          <content>
             <Pane fx:id="pnLienzo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" styleClass="back-white" />
          </content>

@@ -17,6 +17,9 @@ public abstract class CustomControl<T extends Parent> extends Control {
     private MenuItem editar;
     private T contenedor;
     public CustomControl(T contenedor) {
+        // Configura el control
+//        this.size
+
         // Inicializa los elementos del menú de clic derecho
         this.contenedor = contenedor;
         rightClickMenu = new ContextMenu();
