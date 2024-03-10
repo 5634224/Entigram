@@ -213,8 +213,8 @@ public class EntigramController implements Initializable, DragObserver {
     private void pnLienzo_Relacion_onDragDropped(DragEvent event, Pane miPanel) {
         // Crea un nuevo rombo
         Rhombus rombo = new Rhombus(miPanel);
-        rombo.setPrefWidth(100.0);
-        rombo.setPrefHeight(50.0);
+//        rombo.setPrefWidth(100.0);
+//        rombo.setPrefHeight(50.0);
         rombo.setLayoutX(event != null ? event.getX() : 50.0);
         rombo.setLayoutY(event != null ? event.getY() : 50.0);
 
