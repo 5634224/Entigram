@@ -1,8 +1,10 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
+import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,9 +12,11 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Optional;
+
 public class CustomEllipse extends ArrastrableControl {
     private Ellipse ellipse;
-    private LabelControl label;
+    private Label label;
 
     public CustomEllipse(Pane contenedor) {
         super(contenedor);
@@ -25,12 +29,12 @@ public class CustomEllipse extends ArrastrableControl {
         ellipse = new Ellipse();
         ellipse.setFill(Color.WHITE); // Sin color de fondo
         ellipse.setStroke(Color.BLACK); // Borde negro
+        ellipse.setStrokeWidth(STROKE_LINE_WIDTH);
 
         // Label
-        label = new LabelControl(contenedor, "Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nAdiooooooooooooooooooooooooos\nOtra cosa mássssssssss\nJajajaaaaaaaaaaaaaaaaaaaaa");
-        label.get().setFont(Font.font(14.0));
-        label.get().setTextAlignment(TextAlignment.CENTER);
-        label.get().setTextFill(Color.BLACK);
+        label = new Label("Atributo");
+        label.getStyleClass().add("texto-componentes");
+        label.setTextAlignment(TextAlignment.CENTER);
 //        label.setLayoutX(0);
 //        label.setLayoutY(0);
 
@@ -85,11 +89,11 @@ public class CustomEllipse extends ArrastrableControl {
     }
 
     public String getLabelText() {
-        return label.get().getText();
+        return label.getText();
     }
 
     public void setLabelText(String text) {
-        label.get().setText(text);
+        label.setText(text);
         requestLayout();
     }
 
@@ -112,7 +116,8 @@ public class CustomEllipse extends ArrastrableControl {
 
     @Override
     public void editarControl(Event event) {
-        label.editarControl(event);
+        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
+        cadena.ifPresent(s -> label.setText(s));
     }
 
     @Override

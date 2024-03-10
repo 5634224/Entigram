@@ -3,6 +3,11 @@
     -fx-font-family: "Arial";
 }
 
+.fuente .texto-componentes {
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}
+
 .back-grey
 {
     -fx-background-color: #e2e2e2;

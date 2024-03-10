@@ -184,8 +184,8 @@ public class EntigramController implements Initializable, DragObserver {
 
     private void pnLienzo_Entidad_onDragDropped(DragEvent event, Pane miPanel) {
         CustomRectangle rectangulo = new CustomRectangle(miPanel);
-        rectangulo.setRectangleWidth(100.0);
-        rectangulo.setRectangleHeight(100.0);
+//        rectangulo.setRectangleWidth(100.0);
+//        rectangulo.setRectangleHeight(100.0);
         rectangulo.setLayoutX(event != null ? event.getX() : 50.0);
         rectangulo.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -198,8 +198,8 @@ public class EntigramController implements Initializable, DragObserver {
     private void pnLienzo_RelacionDebil_onDragDropped(DragEvent event, Pane miPanel) {
         // Crea un nuevo rombo
         DoubleRhombus drombo = new DoubleRhombus(miPanel);
-        drombo.setRhombusWidth(100.0);
-        drombo.setRhombusHeight(50.0);
+//        drombo.setRhombusWidth(100.0);
+//        drombo.setRhombusHeight(50.0);
         drombo.setLayoutX(event != null ? event.getX() : 50.0);
         drombo.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -241,8 +241,8 @@ public class EntigramController implements Initializable, DragObserver {
 
     private void pnLienzo_EntidadDebil_onDragDropped(DragEvent event, Pane miPanel) {
         DoubleRectangle drectangulo = new DoubleRectangle(miPanel);
-        drectangulo.setRectangleWidth(100.0);
-        drectangulo.setRectangleHeight(100.0);
+//        drectangulo.setRectangleWidth(100.0);
+//        drectangulo.setRectangleHeight(100.0);
         drectangulo.setLayoutX(event != null ? event.getX() : 50.0);
         drectangulo.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -254,8 +254,8 @@ public class EntigramController implements Initializable, DragObserver {
 
     private void pnLienzo_AtributoMultivaluado_onDragDropped(DragEvent event, Pane miPanel) {
         DoubleEllipse elipse = new DoubleEllipse(miPanel);
-        elipse.setEllipseWidth(100.0);
-        elipse.setEllipseHeight(50.0);
+//        elipse.setEllipseWidth(100.0);
+//        elipse.setEllipseHeight(50.0);
         elipse.setLayoutX(event != null ? event.getX() : 50.0);
         elipse.setLayoutY(event != null ? event.getY() : 50.0);
 
@@ -266,9 +266,10 @@ public class EntigramController implements Initializable, DragObserver {
     }
     private void pnLienzo_AtributoDerivado_onDragDropped(DragEvent event, Pane miPanel) {
         CustomEllipse elipse = new CustomEllipse(miPanel);
-        elipse.setEllipseWidth(100.0);
-        elipse.setEllipseHeight(50.0);
+//        elipse.setEllipseWidth(100.0);
+//        elipse.setEllipseHeight(50.0);
         elipse.setDashedBorder(true);
+        elipse.setLabelText("Atributo derivado");
 
         elipse.setLayoutX(event != null ? event.getX() : 50.0);
         elipse.setLayoutY(event != null ? event.getY() : 50.0);

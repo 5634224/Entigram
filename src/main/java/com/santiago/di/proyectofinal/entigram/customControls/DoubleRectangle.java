@@ -1,18 +1,23 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
+import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.util.Optional;
+
 public class DoubleRectangle extends ArrastrableControl {
     public static final double STROKE_LINE_WIDTH = 2.0;
     private Rectangle outerRectangle;
     private Rectangle innerRectangle;
-    private LabelControl label;
+    private Label label;
+    private final double gap = 4; // Define un gap
 
     public DoubleRectangle(Pane contenedor) {
         super(contenedor);
@@ -34,12 +39,18 @@ public class DoubleRectangle extends ArrastrableControl {
         outerRectangle.setStrokeWidth(STROKE_LINE_WIDTH);
 
         // Label
-        label = new LabelControl(this, "Prueba");
-        label.get().setFont(Font.font(14.0));
-        label.get().setTextFill(Color.BLACK);
+        label = new Label("Entidad débil");
+        label.getStyleClass().add("texto-componentes");
 
         // Añade el rectangulo y el label al control
         getChildren().addAll(outerRectangle, innerRectangle, label);
+
+        // Bindea el tamaño del label con el tamaño del rectángulo
+        innerRectangle.widthProperty().bind(label.widthProperty().add(20));
+        innerRectangle.heightProperty().bind(label.heightProperty().add(20));
+
+        outerRectangle.widthProperty().bind(innerRectangle.widthProperty().add(2*gap));
+        outerRectangle.heightProperty().bind(innerRectangle.heightProperty().add(2*gap));
     }
 
     /**
@@ -48,17 +59,17 @@ public class DoubleRectangle extends ArrastrableControl {
     @Override
     public void layoutChildren() {
         super.layoutChildren();
-        double gap = 5; // Define un gap
 
         // Redimensiona el rectangulo exterior
-        outerRectangle.setWidth(getWidth());
-        outerRectangle.setHeight(getHeight());
+//        outerRectangle.setWidth(getWidth());
+//        outerRectangle.setHeight(getHeight());
 
         // Redimensiona el rectangulo interior
-        innerRectangle.setLayoutX(gap);
-        innerRectangle.setLayoutY(gap);
-        innerRectangle.setWidth(getWidth() - 2 * gap);
-        innerRectangle.setHeight(getHeight() - 2 * gap);
+//        innerRectangle.setLayoutX(gap);
+//        innerRectangle.setLayoutY(gap);
+
+//        innerRectangle.setWidth(getWidth() - 2 * gap);
+//        innerRectangle.setHeight(getHeight() - 2 * gap);
 
         // Centrar el Label en el control
         label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
@@ -67,8 +78,9 @@ public class DoubleRectangle extends ArrastrableControl {
 
     @Override
     public void resize(double width, double height) {
+        super.resize(width, height);
 //        requestLayout();
-        layoutChildren();
+//        layoutChildren();
     }
 
     public double getRectangleWidth() {
@@ -90,11 +102,11 @@ public class DoubleRectangle extends ArrastrableControl {
     }
 
     public String getLabelText() {
-        return label.get().getText();
+        return label.getText();
     }
 
     public void setLabelText(String text) {
-        label.get().setText(text);
+        label.setText(text);
         requestLayout();
     }
 
@@ -114,6 +126,7 @@ public class DoubleRectangle extends ArrastrableControl {
 
     @Override
     public void editarControl(Event event) {
-        label.editarControl(event);
+        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
+        cadena.ifPresent(s -> label.setText(s));
     }
 }

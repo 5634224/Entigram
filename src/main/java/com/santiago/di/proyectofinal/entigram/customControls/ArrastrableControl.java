@@ -10,11 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ArrastrableControl extends CustomControl<Pane> implements DragObservable {
+    /*==================== CAMPOS DE CLASE ====================*/
+    public static final double STROKE_LINE_WIDTH = 2.0;
+
+    /*==================== CAMPOS DE OBJETO ====================*/
     private boolean arrastrable;
     private List<DragObserver> observers;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
 
+    /*==================== MÉTODOS ====================*/
     public ArrastrableControl(Pane contenedor) {
         super(contenedor); // Llama al constructor de la clase padre
 
@@ -30,6 +35,7 @@ public abstract class ArrastrableControl extends CustomControl<Pane> implements 
         setOnMouseReleased(this::handleMouseReleased);
     }
 
+    /*==================== MÉTODOS ====================*/
     public void addObserver(DragObserver observer) {
         observers.add(observer);
     }

@@ -22,14 +22,13 @@ import javafx.scene.text.TextAlignment;
 import java.util.Optional;
 
 public class Rhombus extends ArrastrableControl {
-    public static final double STROKE_LINE_WIDTH = 2.0;
     private Polygon polygon;
     private Label label;
 
     public Rhombus(Pane contenedor) {
         super(contenedor);
 
-        this.setStyle("-fx-background-color: yellow;");
+//        this.setStyle("-fx-background-color: yellow;");
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -51,64 +50,15 @@ public class Rhombus extends ArrastrableControl {
 
         // Label
         label = new Label();
-        label.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaa\nPruebitaaaaaaaaaaaaaaaaaaaa");
-        label.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 14.0));
-        label.setTextAlignment(TextAlignment.CENTER);
-        label.setTextFill(Color.BLACK);
-//        label.setPadding(new Insets(50));
-        requestLayout();
+//        label.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 14.0));
+        label.getStyleClass().add("texto-componentes");
+//        label.setTextAlignment(TextAlignment.CENTER);
         label.textProperty().addListener(this::handleTextChange);
-
-//        // Vincular el tamaño del rombo al tamaño del texto del Label
-//        label.widthProperty().addListener((obs, oldVal, newVal) -> {
-//            setRhombusWidth(newVal.doubleValue() * 1.8 + 20);
-////            requestLayout();
-//            layoutChildren();
-//        });
-//
-//
-//        label.heightProperty().addListener((obs, oldVal, newVal) -> {
-//            setRhombusHeight(newVal.doubleValue() * 1.8 + 10);
-////            requestLayout();
-//            layoutChildren();
-//        });
-
-        // Agrupa el rombo y el label
-//        Pane pane = new Pane();
 
         // Añade el rombo y el label al control
         getChildren().addAll(polygon, label);
 
-//        // Crea un ChangeListener para la propiedad widthProperty del Label
-//        ChangeListener<Number> labelWidthChangeListener = new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//                // Actualiza la anchura del Polygon
-//                polygon.getPoints().setAll(
-//                        newValue.doubleValue() / 2, 0.0,
-//                        newValue.doubleValue(), getHeight() / 2,
-//                        newValue.doubleValue() / 2, getHeight(),
-//                        0.0, getHeight() / 2
-//                );
-//                requestLayout();
-//            }
-//        };
-//
-//        // Crea un ChangeListener para la propiedad heightProperty del Label
-//        ChangeListener<Number> labelHeightChangeListener = new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//                // Actualiza la altura del Polygon
-//                polygon.getPoints().setAll(
-//                        getWidth() / 2, 0.0,
-//                        getWidth(), newValue.doubleValue() / 2,
-//                        getWidth() / 2, newValue.doubleValue(),
-//                        0.0, newValue.doubleValue() / 2
-//                );
-//                requestLayout();
-//            }
-//        };
-
+        // Crea un ChangeListener para las propiedades widthProperty y heightProperty del Label. Cuando cambie el tamaño del label, se redimensionará el rombo
         ChangeListener<Number> labelSizeChangeListener = new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -120,6 +70,7 @@ public class Rhombus extends ArrastrableControl {
                         0.0, label.getHeight() / 2
                 );
                 requestLayout();
+                autosize();
             }
         };
 
@@ -127,15 +78,15 @@ public class Rhombus extends ArrastrableControl {
         label.widthProperty().addListener(labelSizeChangeListener);
         label.heightProperty().addListener(labelSizeChangeListener);
 
-        // Escucha los cambios en la propiedad textProperty del Label
+        // Escucha los cambios en la propiedad textProperty del Label para aplicar padding al label y que se expanda el rombo
         label.textProperty().addListener((observable, oldValue, newValue) -> {
             // Calcula el nuevo padding en función de la longitud del texto
-            double newPaddingHorizontal = newValue.length() * 1.1; // Ajusta este factor según sea necesario
+            double newPaddingHorizontal = newValue.length() * 1.1; // Ajustar este factor según sea necesario
             double newPaddingVertical = newPaddingHorizontal * 1.8; // Ajusta este factor según sea necesario
 
-            // Asegúrate de que el padding no sea menor que un valor mínimo
-            newPaddingHorizontal = Math.max(newPaddingHorizontal, 30); // Ajusta este valor mínimo según sea necesario
-            newPaddingVertical = Math.max(newPaddingVertical, 15); // Ajusta este valor mínimo según sea necesario
+            // Asegurar que el padding no sea menor que un valor mínimo
+            newPaddingHorizontal = Math.max(newPaddingHorizontal, 30); // Ajustar este valor mínimo según sea necesario
+            newPaddingVertical = Math.max(newPaddingVertical, 15); // Ajustar este valor mínimo según sea necesario
 
             // Aplica el nuevo padding al Label
             label.setPadding(new Insets(newPaddingVertical, newPaddingHorizontal, newPaddingVertical, newPaddingHorizontal));
@@ -145,11 +96,8 @@ public class Rhombus extends ArrastrableControl {
 //            layoutChildren();
         });
 
-
-//        label.setLayoutX(25);
-//        label.setLayoutY(0);
-//        requestLayout();
-//        layoutChildren();
+        // Asigna el texto por defecto
+        label.setText("Relación");
     }
 
     @Override

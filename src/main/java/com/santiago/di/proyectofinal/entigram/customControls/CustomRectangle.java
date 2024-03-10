@@ -1,15 +1,21 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
+import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.util.Optional;
+
 public class CustomRectangle extends ArrastrableControl {
-    private LabelControl label;
+    private Label label;
     private Rectangle customRectangle;
 
     public CustomRectangle(Pane contenedor) {
@@ -23,23 +29,23 @@ public class CustomRectangle extends ArrastrableControl {
         customRectangle = new Rectangle();
         customRectangle.setFill(Color.WHITE); // Sin color de fondo
         customRectangle.setStroke(Color.BLACK); // Borde negro
+        customRectangle.setStrokeWidth(STROKE_LINE_WIDTH);
 
         // Label
-        label = new LabelControl(this,"Prueba");
-        label.get().setFont(Font.font(14.0));
-        label.get().setTextFill(Color.BLACK);
+        label = new Label("Entidad");
+        label.getStyleClass().add("texto-componentes");
 
         // Añade el rectangulo y el label al control
         getChildren().addAll(customRectangle, label);
+
+        // Bindea el tamaño del label con el tamaño del rectángulo
+        customRectangle.widthProperty().bind(label.widthProperty().add(20));
+        customRectangle.heightProperty().bind(label.heightProperty().add(20));
     }
 
     @Override
     public void layoutChildren() {
-        customRectangle.setWidth(getWidth());
-        customRectangle.setHeight(getHeight());
-
-        label.applyCss();
-        label.layout();
+        super.layoutChildren();
 
         // Centrar el Label en el control
         label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
@@ -48,9 +54,10 @@ public class CustomRectangle extends ArrastrableControl {
 
     @Override
     public void resize(double width, double height) {
+        super.resize(width, height);
 //        customRectangle.setWidth(width);
 //        customRectangle.setHeight(height);
-        requestLayout();
+//        requestLayout();
     }
 
     public double getRectangleWidth() {
@@ -74,11 +81,11 @@ public class CustomRectangle extends ArrastrableControl {
     }
 
     public String getLabelText() {
-        return label.get().getText();
+        return label.getText();
     }
 
     public void setLabelText(String text) {
-        label.get().setText(text);
+        label.setText(text);
         requestLayout();
     }
 
@@ -98,6 +105,7 @@ public class CustomRectangle extends ArrastrableControl {
 
     @Override
     public void editarControl(Event event) {
-        label.editarControl(event);
+        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
+        cadena.ifPresent(s -> label.setText(s));
     }
 }
