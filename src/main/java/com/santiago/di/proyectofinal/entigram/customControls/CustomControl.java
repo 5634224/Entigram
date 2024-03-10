@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
  * Clase abstracta que define un control con menú contextual (clic derecho) y que puede ser editado.
  * @param <T> Tipo de contenedor en el que se encuentra el control
  */
-public abstract class CustomControl<T extends Parent> extends Control {
+public abstract class CustomControl<T extends Parent> extends Control implements ICustomControl<T> {
     private ContextMenu rightClickMenu;
     private MenuItem eliminar;
     private MenuItem editar;
@@ -50,10 +50,12 @@ public abstract class CustomControl<T extends Parent> extends Control {
         }
     }
 
+    @Override
     public void setContenedor(T contenedor) {
         this.contenedor = contenedor;
     }
 
+    @Override
     public T getContenedor() {
         return contenedor;
     }
