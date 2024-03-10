@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 
 import java.util.Optional;
 
-public class DoubleRhombus extends ArrastrableControl {
+public class DoubleRhombus extends ArrastrableControl implements IRelationControl {
     private Polygon outerPolygon;
     private Polygon innerPolygon;
     private Label label;
@@ -154,23 +154,23 @@ public class DoubleRhombus extends ArrastrableControl {
         return getHeight() / 10.5;
     }
 
-    public double getRhombusWidth() {
-        return getWidth();
-    }
-
-    public void setRhombusWidth(double width) {
-        setWidth(width);
-        requestLayout();
-    }
-
-    public double getRhombusHeight() {
-        return getHeight();
-    }
-
-    public void setRhombusHeight(double height) {
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getRhombusWidth() {
+//        return getWidth();
+//    }
+//
+//    public void setRhombusWidth(double width) {
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public double getRhombusHeight() {
+//        return getHeight();
+//    }
+//
+//    public void setRhombusHeight(double height) {
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

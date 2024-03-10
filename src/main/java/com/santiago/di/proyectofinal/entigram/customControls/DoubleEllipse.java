@@ -11,7 +11,7 @@ import javafx.scene.text.Font;
 
 import java.util.Optional;
 
-public class DoubleEllipse extends ArrastrableControl {
+public class DoubleEllipse extends ArrastrableControl implements IAtributeControl {
     private Ellipse outerEllipse;
     private Ellipse innerEllipse;
     private Label label;
@@ -74,23 +74,23 @@ public class DoubleEllipse extends ArrastrableControl {
 //        super.resize(width, height);
 //    }
 
-    public double getEllipseWidth() {
-        return outerEllipse.getRadiusX() * 2;
-    }
-
-    public void setEllipseWidth(double width) {
-        setWidth(width);
-        requestLayout();
-    }
-
-    public double getEllipseHeight() {
-        return outerEllipse.getRadiusY() * 2;
-    }
-
-    public void setEllipseHeight(double height) {
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getEllipseWidth() {
+//        return outerEllipse.getRadiusX() * 2;
+//    }
+//
+//    public void setEllipseWidth(double width) {
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public double getEllipseHeight() {
+//        return outerEllipse.getRadiusY() * 2;
+//    }
+//
+//    public void setEllipseHeight(double height) {
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

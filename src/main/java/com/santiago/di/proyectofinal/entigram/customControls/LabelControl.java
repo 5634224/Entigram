@@ -11,15 +11,16 @@ import javafx.scene.text.Font;
 
 import java.util.Optional;
 
-public class LabelControl<T extends Parent> extends CustomControl<T> {
+public class LabelControl<T extends Parent> extends CustomControl<T> implements IERControl {
     private Label label;
     public LabelControl(T panelContenedor, String texto) {
         super(panelContenedor);
         label = new Label(texto);
 
         // Propìedades label
-        label.setFont(Font.font(14.0));
-        label.setTextFill(Color.BLACK);
+//        label.setFont(Font.font(14.0));
+//        label.setTextFill(Color.BLACK);
+        label.getStyleClass().add("texto-componentes");
 
         // Bindea el label con el control
 //        label.layoutXProperty().bind(this.layoutXProperty());
@@ -67,6 +68,17 @@ public class LabelControl<T extends Parent> extends CustomControl<T> {
 
     public Label get() {
         return label;
+    }
+
+    @Override
+    public String getLabelText() {
+        return label.getText();
+    }
+
+    @Override
+    public void setLabelText(String text) {
+        label.setText(text);
+        requestLayout();
     }
 
     public double getLabelWidth() {

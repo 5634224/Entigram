@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 
 import java.util.Optional;
 
-public class DoubleRectangle extends ArrastrableControl {
+public class DoubleRectangle extends ArrastrableControl implements IEntityControl {
     public static final double STROKE_LINE_WIDTH = 2.0;
     private Rectangle outerRectangle;
     private Rectangle innerRectangle;
@@ -83,23 +83,23 @@ public class DoubleRectangle extends ArrastrableControl {
 //        layoutChildren();
     }
 
-    public double getRectangleWidth() {
-        return getWidth();
-    }
-
-    public double getRectangleHeight() {
-        return getHeight();
-    }
-
-    public void setRectangleWidth(double width) {
-        setWidth(width);
-        requestLayout();
-    }
-
-    public void setRectangleHeight(double height) {
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getRectangleWidth() {
+//        return getWidth();
+//    }
+//
+//    public double getRectangleHeight() {
+//        return getHeight();
+//    }
+//
+//    public void setRectangleWidth(double width) {
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public void setRectangleHeight(double height) {
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

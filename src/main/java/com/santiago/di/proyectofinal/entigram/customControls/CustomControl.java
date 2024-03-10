@@ -11,6 +11,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * Clase abstracta que define un control con menú contextual (clic derecho) y que puede ser editado.
+ * @param <T> Tipo de contenedor en el que se encuentra el control
+ */
 public abstract class CustomControl<T extends Parent> extends Control {
     private ContextMenu rightClickMenu;
     private MenuItem eliminar;

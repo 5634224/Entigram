@@ -21,7 +21,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.Optional;
 
-public class Rhombus extends ArrastrableControl {
+public class Rhombus extends ArrastrableControl implements IRelationControl {
     private Polygon polygon;
     private Label label;
 
@@ -130,23 +130,23 @@ public class Rhombus extends ArrastrableControl {
 
     }
 
-    public double getRhombusWidth() {
-        return getWidth();
-    }
-
-    public void setRhombusWidth(double width) {
-        setWidth(width);
-        requestLayout();
-    }
-
-    public double getRhombusHeight() {
-        return getHeight();
-    }
-
-    public void setRhombusHeight(double height) {
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getRhombusWidth() {
+//        return getWidth();
+//    }
+//
+//    public void setRhombusWidth(double width) {
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public double getRhombusHeight() {
+//        return getHeight();
+//    }
+//
+//    public void setRhombusHeight(double height) {
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

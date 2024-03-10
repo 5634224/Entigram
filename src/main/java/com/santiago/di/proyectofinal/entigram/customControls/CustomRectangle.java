@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 
 import java.util.Optional;
 
-public class CustomRectangle extends ArrastrableControl {
+public class CustomRectangle extends ArrastrableControl implements IEntityControl {
     private Label label;
     private Rectangle customRectangle;
 
@@ -60,25 +60,25 @@ public class CustomRectangle extends ArrastrableControl {
 //        requestLayout();
     }
 
-    public double getRectangleWidth() {
-        return customRectangle.getWidth();
-    }
-
-    public void setRectangleWidth(double width) {
-//        customRectangle.setWidth(width);
-        setWidth(width);
-        requestLayout();
-    }
-
-    public double getRectangleHeight() {
-        return customRectangle.getHeight();
-    }
-
-    public void setRectangleHeight(double height) {
-//        customRectangle.setHeight(height);
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getRectangleWidth() {
+//        return customRectangle.getWidth();
+//    }
+//
+//    public void setRectangleWidth(double width) {
+////        customRectangle.setWidth(width);
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public double getRectangleHeight() {
+//        return customRectangle.getHeight();
+//    }
+//
+//    public void setRectangleHeight(double height) {
+////        customRectangle.setHeight(height);
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

@@ -1,21 +1,22 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
 import javafx.beans.value.ChangeListener;
-import javafx.scene.Parent;
-import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ArrastrableControl extends CustomControl<Pane> implements DragObservable {
+/**
+ * Clase abstracta que define un control arrastrable con menú contextual.
+ */
+public abstract class ArrastrableControl extends CustomControl<Pane> implements IArrastrableControl {
     /*==================== CAMPOS DE CLASE ====================*/
     public static final double STROKE_LINE_WIDTH = 2.0;
 
     /*==================== CAMPOS DE OBJETO ====================*/
     private boolean arrastrable;
-    private List<DragObserver> observers;
+    private List<IDragObserver> observers;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
 
@@ -36,16 +37,18 @@ public abstract class ArrastrableControl extends CustomControl<Pane> implements 
     }
 
     /*==================== MÉTODOS ====================*/
-    public void addObserver(DragObserver observer) {
+    @Override
+    public void addObserver(IDragObserver observer) {
         observers.add(observer);
     }
 
-    public void removeObserver(DragObserver observer) {
+    @Override
+    public void removeObserver(IDragObserver observer) {
         observers.remove(observer);
     }
 
     private void notifyObservers(String mensaje) {
-        for (DragObserver observer : observers) {
+        for (IDragObserver observer : observers) {
             observer.updateEstado(mensaje);
         }
     }
@@ -106,21 +109,21 @@ public abstract class ArrastrableControl extends CustomControl<Pane> implements 
         return posiciones;
     }
 
-    public double[] getPositionSouth() {
+    public double[] getPosicionSouth() {
         double posiciones[] = new double[2];
         posiciones[0] = this.getLayoutX() + this.getWidth() / 2;
         posiciones[1] = this.getLayoutY() + this.getHeight();
         return posiciones;
     }
 
-    public double[] getPositionEast() {
+    public double[] getPosicionEast() {
         double posiciones[] = new double[2];
         posiciones[0] = this.getLayoutX() + this.getWidth();
         posiciones[1] = this.getLayoutY() + this.getHeight() / 2;
         return posiciones;
     }
 
-    public double[] getPositionWest() {
+    public double[] getPosicionWest() {
         double posiciones[] = new double[2];
         posiciones[0] = this.getLayoutX();
         posiciones[1] = this.getLayoutY() + this.getHeight() / 2;

@@ -14,7 +14,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.Optional;
 
-public class CustomEllipse extends ArrastrableControl {
+public class CustomEllipse extends ArrastrableControl implements IAtributeControl {
     private Ellipse ellipse;
     private Label label;
 
@@ -70,23 +70,23 @@ public class CustomEllipse extends ArrastrableControl {
 //        layoutChildren();
 //    }
 
-    public double getEllipseWidth() {
-        return ellipse.getRadiusX() * 2;
-    }
-
-    public void setEllipseWidth(double width) {
-        setWidth(width);
-        requestLayout();
-    }
-
-    public double getEllipseHeight() {
-        return ellipse.getRadiusY() * 2;
-    }
-
-    public void setEllipseHeight(double height) {
-        setHeight(height);
-        requestLayout();
-    }
+//    public double getEllipseWidth() {
+//        return ellipse.getRadiusX() * 2;
+//    }
+//
+//    public void setEllipseWidth(double width) {
+//        setWidth(width);
+//        requestLayout();
+//    }
+//
+//    public double getEllipseHeight() {
+//        return ellipse.getRadiusY() * 2;
+//    }
+//
+//    public void setEllipseHeight(double height) {
+//        setHeight(height);
+//        requestLayout();
+//    }
 
     public String getLabelText() {
         return label.getText();

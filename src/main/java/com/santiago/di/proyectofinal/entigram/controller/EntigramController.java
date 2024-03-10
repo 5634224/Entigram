@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EntigramController implements Initializable, DragObserver {
+public class EntigramController implements Initializable, IDragObserver {
     public static final double duracionToolTips = 0.1;
     /*==================== Atributos ====================*/
     private Escenario escenario;

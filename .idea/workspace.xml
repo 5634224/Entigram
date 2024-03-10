@@ -4,17 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Rhombus arreglado con una nueva técnica">
+    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Todos los componentes arreglados, proyecto listo para implementar las relaciones y unión con flechas">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IArrastrableControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IAtributeControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IERControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IEntityControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IRelationControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/ArrastrableControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/ArrastrableControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRhombus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleRhombus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DragObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IDragObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DragObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IDragObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/EntityControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +181,7 @@
       <workItem from="1709571259996" duration="1288000" />
       <workItem from="1709679446861" duration="35000" />
       <workItem from="1709827794456" duration="10149000" />
-      <workItem from="1709896442107" duration="54305000" />
+      <workItem from="1709896442107" duration="63008000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)">
       <option name="closed" value="true" />
@@ -230,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710037440877</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Todos los componentes arreglados, proyecto listo para implementar las relaciones y unión con flechas">
+      <option name="closed" value="true" />
+      <created>1710052532216</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1710052532216</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,14 +259,15 @@
     <MESSAGE value="Menú contextual arreglado. Experimentando con el lienzo scrollable" />
     <MESSAGE value="No consigo nada... En el siguiente commit, posiblemente reconsidere usar Label a secas, simplemente. Voy a volver a la versión de Rhombus.bak" />
     <MESSAGE value="Rhombus arreglado con una nueva técnica" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rhombus arreglado con una nueva técnica" />
+    <MESSAGE value="Todos los componentes arreglados, proyecto listo para implementar las relaciones y unión con flechas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Todos los componentes arreglados, proyecto listo para implementar las relaciones y unión con flechas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java</url>
-          <line>27</line>
+          <line>28</line>
           <properties>
             <option name="lambda-ordinal" value="0" />
           </properties>
@@ -257,7 +275,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java</url>
-          <line>32</line>
+          <line>33</line>
           <properties>
             <option name="lambda-ordinal" value="0" />
           </properties>
