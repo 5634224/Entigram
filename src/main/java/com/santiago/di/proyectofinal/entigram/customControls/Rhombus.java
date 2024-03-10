@@ -1,13 +1,14 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
 import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.collections.ListChangeListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Bounds;
-import javafx.scene.control.Control;
+import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Pane;
@@ -23,98 +24,148 @@ import java.util.Optional;
 public class Rhombus extends ArrastrableControl {
     public static final double STROKE_LINE_WIDTH = 2.0;
     private Polygon polygon;
-    private LabelControl<Control> label;
-    private boolean isUpdatingSize = false;
+    private Label label;
 
     public Rhombus(Pane contenedor) {
         super(contenedor);
 
-        // Establece el tamaño por defecto del componente
-//        setWidth(100);
-//        setHeight(50);
+        this.setStyle("-fx-background-color: yellow;");
 
-//        // Establece el color de fondo
-        this.setStyle("-fx-background-color: black");
+        // Establece el tamaño por defecto del componente
+        setWidth(100);
+        setHeight(50);
 
         // Crea un rombo
         polygon = new Polygon();
         polygon.setFill(Color.WHITE); // Sin color de fondo
         polygon.setStroke(Color.BLACK); // Borde negro
         polygon.setStrokeWidth(STROKE_LINE_WIDTH);
-        polygon.getPoints().setAll(50.0, 0.0,
-                100.0, 50.0,
-                50.0, 100.0,
-                0.0, 50.0);
+
+        polygon.getPoints().clear();
+        polygon.getPoints().addAll(
+                getWidth() / 2, 0.0,
+                getWidth(), getHeight() / 2,
+                getWidth() / 2, getHeight(),
+                0.0, getHeight() / 2
+        );
 
         // Label
-        label = new LabelControl<Control>(this);
-        label.get().setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaa\nPruebitaaaaaaaaaaaaaaaaaaaa");
-        label.get().setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 14.0));
-        label.get().setTextAlignment(TextAlignment.CENTER);
-        label.get().setTextFill(Color.BLACK);
-
+        label = new Label();
+        label.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaa\nPruebitaaaaaaaaaaaaaaaaaaaa");
+        label.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 14.0));
+        label.setTextAlignment(TextAlignment.CENTER);
+        label.setTextFill(Color.BLACK);
+//        label.setPadding(new Insets(50));
+        requestLayout();
+        label.textProperty().addListener(this::handleTextChange);
 
 //        // Vincular el tamaño del rombo al tamaño del texto del Label
-//        label.prefWidthProperty().addListener((obs, oldVal, newVal) -> {
+//        label.widthProperty().addListener((obs, oldVal, newVal) -> {
 //            setRhombusWidth(newVal.doubleValue() * 1.8 + 20);
 ////            requestLayout();
-//            this.layoutChildren();
+//            layoutChildren();
 //        });
-//////
-//////
-//        label.prefHeightProperty().addListener((obs, oldVal, newVal) -> {
+//
+//
+//        label.heightProperty().addListener((obs, oldVal, newVal) -> {
 //            setRhombusHeight(newVal.doubleValue() * 1.8 + 10);
 ////            requestLayout();
-//            this.layoutChildren();
+//            layoutChildren();
 //        });
+
+        // Agrupa el rombo y el label
+//        Pane pane = new Pane();
 
         // Añade el rombo y el label al control
         getChildren().addAll(polygon, label);
+
+//        // Crea un ChangeListener para la propiedad widthProperty del Label
+//        ChangeListener<Number> labelWidthChangeListener = new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+//                // Actualiza la anchura del Polygon
+//                polygon.getPoints().setAll(
+//                        newValue.doubleValue() / 2, 0.0,
+//                        newValue.doubleValue(), getHeight() / 2,
+//                        newValue.doubleValue() / 2, getHeight(),
+//                        0.0, getHeight() / 2
+//                );
+//                requestLayout();
+//            }
+//        };
+//
+//        // Crea un ChangeListener para la propiedad heightProperty del Label
+//        ChangeListener<Number> labelHeightChangeListener = new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+//                // Actualiza la altura del Polygon
+//                polygon.getPoints().setAll(
+//                        getWidth() / 2, 0.0,
+//                        getWidth(), newValue.doubleValue() / 2,
+//                        getWidth() / 2, newValue.doubleValue(),
+//                        0.0, newValue.doubleValue() / 2
+//                );
+//                requestLayout();
+//            }
+//        };
+
+        ChangeListener<Number> labelSizeChangeListener = new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                // Actualiza la anchura y altura del Polygon
+                polygon.getPoints().setAll(
+                        label.getWidth() / 2, 0.0,
+                        label.getWidth(), label.getHeight() / 2,
+                        label.getWidth() / 2, label.getHeight(),
+                        0.0, label.getHeight() / 2
+                );
+                requestLayout();
+            }
+        };
+
+        // Vincula las dimensiones del Polygon al Label
+        label.widthProperty().addListener(labelSizeChangeListener);
+        label.heightProperty().addListener(labelSizeChangeListener);
+
+        // Escucha los cambios en la propiedad textProperty del Label
+        label.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Calcula el nuevo padding en función de la longitud del texto
+            double newPaddingHorizontal = newValue.length() * 1.1; // Ajusta este factor según sea necesario
+            double newPaddingVertical = newPaddingHorizontal * 1.8; // Ajusta este factor según sea necesario
+
+            // Asegúrate de que el padding no sea menor que un valor mínimo
+            newPaddingHorizontal = Math.max(newPaddingHorizontal, 30); // Ajusta este valor mínimo según sea necesario
+            newPaddingVertical = Math.max(newPaddingVertical, 15); // Ajusta este valor mínimo según sea necesario
+
+            // Aplica el nuevo padding al Label
+            label.setPadding(new Insets(newPaddingVertical, newPaddingHorizontal, newPaddingVertical, newPaddingHorizontal));
+
+            // Solicita un nuevo layout para aplicar los cambios
+            requestLayout();
+//            layoutChildren();
+        });
+
+
 //        label.setLayoutX(25);
 //        label.setLayoutY(0);
 //        requestLayout();
 //        layoutChildren();
-
-
-//        widthProperty().addListener((obs, oldVal, newVal) -> {
-//            if (!isUpdatingSize) {
-//                Platform.runLater(this::updatePolygonSize);
-//            }
-//        });
-//        heightProperty().addListener((obs, oldVal, newVal) -> {
-//            if (!isUpdatingSize) {
-//                Platform.runLater(this::updatePolygonSize);
-//            }
-//        });
-
-        // Añade un ChangeListener a los puntos del Polygon
-//        polygon.getPoints().addListener((ListChangeListener.Change<? extends Double> c) -> {
-//            updateRhombusSize();
-//        });
-
     }
 
     @Override
     public void layoutChildren() {
         super.layoutChildren();
+//        setWidth(label.widthProperty().doubleValue() * 1.8 + 20);
+//        setHeight(label.heightProperty().doubleValue() * 1.8 + 10);
 
-        // Actualiza el tamaño del rombo
-//        updateRhombusSize();
+        // Centra el label dentro del rombo
+        label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
+        label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
+
+
+
+
 //
-//        // Dibuja el rombo
-//        polygon.getPoints().clear();
-//        polygon.getPoints().addAll(
-//                getWidth() / 2, 0.0,
-//                getWidth(), getHeight() / 2,
-//                getWidth() / 2, getHeight(),
-//                0.0, getHeight() / 2
-//        );
-
-
-////        // Centra el label dentro del rombo
-//        label.setLayoutX(getWidth() / 2 - label.getWidth() / 2);
-//        label.setLayoutY(getHeight() / 2 - label.getHeight() / 2);
-
 //        System.out.println(label.getLayoutX() + " " + label.getLayoutY());
 //        System.out.println(label.getWidth() + " " + label.getHeight());
 //        System.out.println(label.get().getLayoutX() + " " + label.get().getLayoutY());
@@ -124,71 +175,37 @@ public class Rhombus extends ArrastrableControl {
 //        System.out.println(label.getLayoutY());
     }
 
-    @Override
-    public void resize(double width, double height) {
-        // Actualiza el tamaño del rombo
-        super.resize(width, height);
-
-//        updatePolygonSize();
-
-//        requestLayout();
+    private void handleTextChange(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        // Dibuja el rombo
 //        layoutChildren();
 
 
-        double x = (width - 100) / 2;
-        double y = (height - 100) / 2;
-
-        polygon.getPoints().setAll(
-                x + 50.0, y,
-                x + 100.0, y + 50.0,
-                x + 50.0, y + 100.0,
-                x, y + 50.0
-        );
     }
 
-//    private void updatePolygonSize() {
-//        // Dibuja el rombo
-////        isUpdatingSize = true;
-//        polygon.getPoints().clear();
-//        polygon.getPoints().addAll(
-//                getWidth() / 2, 0.0,
-//                getWidth(), getHeight() / 2,
-//                getWidth() / 2, getHeight(),
-//                0.0, getHeight() / 2
-//        );
-//        isUpdatingSize = false;
-//    }
-
-    private void updateRhombusSize() {
-        Bounds bounds = polygon.getBoundsInLocal();
-        setWidth(bounds.getWidth());
-        setHeight(bounds.getHeight());
+    public double getRhombusWidth() {
+        return getWidth();
     }
 
-//    public double getRhombusWidth() {
-//        return getWidth();
-//    }
+    public void setRhombusWidth(double width) {
+        setWidth(width);
+        requestLayout();
+    }
 
-//    public void setRhombusWidth(double width) {
-////        setWidth(width);
-////        requestLayout();
-//    }
+    public double getRhombusHeight() {
+        return getHeight();
+    }
 
-//    public double getRhombusHeight() {
-//        return getHeight();
-//    }
-
-//    public void setRhombusHeight(double height) {
-////        setHeight(height);
-////        requestLayout();
-//    }
+    public void setRhombusHeight(double height) {
+        setHeight(height);
+        requestLayout();
+    }
 
     public String getLabelText() {
-        return label.get().getText();
+        return label.getText();
     }
 
     public void setLabelText(String text) {
-        label.get().setText(text);
+        label.setText(text);
         requestLayout();
     }
 
@@ -204,8 +221,8 @@ public class Rhombus extends ArrastrableControl {
     @Override
     public void editarControl(Event event) {
 //        label.editarControl(event);
-        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.get().getText());
-        cadena.ifPresent(s -> label.get().setText(s));
+        Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
+        cadena.ifPresent(s -> label.setText(s));
     }
 
     @Override

@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Menú contextual arreglado. Experimentando con el lienzo scrollable">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="No consigo nada... En el siguiente commit, posiblemente reconsidere usar Label a secas, simplemente. Voy a volver a la versión de Rhombus.bak">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/LabelControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/entigram.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/santiago/di/proyectofinal/entigram/entigram.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +164,7 @@
       <workItem from="1709571259996" duration="1288000" />
       <workItem from="1709679446861" duration="35000" />
       <workItem from="1709827794456" duration="10149000" />
-      <workItem from="1709896442107" duration="24429000" />
+      <workItem from="1709896442107" duration="41966000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)">
       <option name="closed" value="true" />
@@ -204,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709437992210</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="No consigo nada... En el siguiente commit, posiblemente reconsidere usar Label a secas, simplemente. Voy a volver a la versión de Rhombus.bak">
+      <option name="closed" value="true" />
+      <created>1709954197640</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709954197640</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +216,8 @@
     <MESSAGE value="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)" />
     <MESSAGE value="Problema con el LabelControl&#10;He hecho rollback a Rhombus para no usar LabelControl, porque de momento LabelControl me da problemas al usarlo en los ArrastrableControl.&#10;El resto de componentes arrastrables, aún usan LabelControl, por lo que aún siguen afectados." />
     <MESSAGE value="Menú contextual arreglado. Experimentando con el lienzo scrollable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Menú contextual arreglado. Experimentando con el lienzo scrollable" />
+    <MESSAGE value="No consigo nada... En el siguiente commit, posiblemente reconsidere usar Label a secas, simplemente. Voy a volver a la versión de Rhombus.bak" />
+    <option name="LAST_COMMIT_MESSAGE" value="No consigo nada... En el siguiente commit, posiblemente reconsidere usar Label a secas, simplemente. Voy a volver a la versión de Rhombus.bak" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -239,26 +242,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java</url>
           <line>217</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Rhombus.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
