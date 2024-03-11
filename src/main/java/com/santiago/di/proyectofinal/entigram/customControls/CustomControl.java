@@ -41,6 +41,10 @@ public abstract class CustomControl<T extends Parent> extends Control implements
         eliminar.setOnAction(this::eliminarControlDelContenedor);
     }
 
+    public ContextMenu getRightClickMenu() {
+        return rightClickMenu;
+    }
+
     private void onMouseClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY) {
             System.out.println("Hizo clic derecho");

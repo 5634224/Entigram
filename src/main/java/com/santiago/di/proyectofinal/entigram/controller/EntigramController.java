@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -15,12 +16,15 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EntigramController implements Initializable, IDragObserver {
     public static final double duracionToolTips = 0.1;
-    /*==================== Atributos ====================*/
+    /*==================== ATRIBUTOS ====================*/
     private Escenario escenario;
+    private ArrayList<Relationship> relaciones;
+    private Relationship currentRelationship;
 
     @FXML
     private Button btnEntidad;
@@ -71,7 +75,7 @@ public class EntigramController implements Initializable, IDragObserver {
     @FXML
     private Tooltip toolTipRehacer;
 
-    /*==================== Métodos ====================*/
+    /*==================== MÉTODOS ====================*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        CustomRectangle rectangulo = new CustomRectangle();
@@ -83,6 +87,9 @@ public class EntigramController implements Initializable, IDragObserver {
 //
 //        pnLienzo.getChildren().add(rectangulo);
 //        prueba();
+
+        // Inicializa la lista de relaciones
+        relaciones = new ArrayList<>();
 
         // Establece el tiempo de espera para mostrar los tooltips
         toolTipDeshacer.setShowDelay(Duration.seconds(duracionToolTips));
@@ -349,19 +356,38 @@ public class EntigramController implements Initializable, IDragObserver {
 
     @FXML
     public void btnLinea_onAction(ActionEvent actionEvent) {
-        LabelControl label = new LabelControl(pnLienzo, "Línea");
-//        label.setLabelWidth(200.0);
-//        label.setLabelHeight(50.0);
-//        label.get().setText("Línea");
+//        LabelControl label = new LabelControl(pnLienzo, "Línea");
+////        label.setLabelWidth(200.0);
+////        label.setLabelHeight(50.0);
+////        label.get().setText("Línea");
+//
+//        label.setLayoutX(50.0);
+//        label.setLayoutY(50.0);
+//
+//        pnLienzo.getChildren().add(label);
+//
+////        label.addObserver(this);
 
-        label.setLayoutX(50.0);
-        label.setLayoutY(50.0);
-
-        pnLienzo.getChildren().add(label);
-
-//        label.addObserver(this);
-
-        lblEstado.setText("Dibujando línea");
+        // En función del estado actual, activa o desactiva la herramienta de relación
+        if (lblEstado.getText().equals("Herramienta relación. Por favor, seleccione dos entidades o una entidad y un atributo")) {
+            lblEstado.setText("Herramienta relación desactivada.");
+            // Activa el arrastre de los controles
+            for (Node nodo : pnLienzo.getChildren()) {
+                if (nodo instanceof IArrastrableControl) {
+                    IArrastrableControl entidad = (IArrastrableControl) nodo;
+                    entidad.setArrastrable(true);
+                }
+            }
+        } else {
+            lblEstado.setText("Herramienta relación. Por favor, seleccione dos entidades o una entidad y un atributo");
+            // Desactiva el arrastre de los controles
+            for (Node nodo : pnLienzo.getChildren()) {
+                if (nodo instanceof IArrastrableControl) {
+                    IArrastrableControl entidad = (IArrastrableControl) nodo;
+                    entidad.setArrastrable(false);
+                }
+            }
+        }
     }
 
     @FXML

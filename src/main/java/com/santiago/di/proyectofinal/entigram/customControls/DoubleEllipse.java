@@ -4,6 +4,8 @@ import com.santiago.di.proyectofinal.entigram.JavaFXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -18,6 +20,12 @@ public class DoubleEllipse extends ArrastrableControl implements IAtributeContro
 
     public DoubleEllipse(Pane contenedor) {
         super(contenedor);
+
+        // Añade una opción al menú contextual para establecer si es clave primaria
+        MenuItem clavePrimariaMenuItem = new MenuItem("Clave primaria");
+        clavePrimariaMenuItem.setOnAction(this::toggleClavePrimaria);
+        SeparatorMenuItem separador = new SeparatorMenuItem();
+        getRightClickMenu().getItems().addAll(separador, clavePrimariaMenuItem);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -46,6 +54,10 @@ public class DoubleEllipse extends ArrastrableControl implements IAtributeContro
         outerEllipse.radiusYProperty().bind(innerEllipse.radiusYProperty().multiply(1.2));
 
         getChildren().addAll(outerEllipse, innerEllipse, label);
+    }
+
+    private void toggleClavePrimaria(ActionEvent actionEvent) {
+        setClavePrimaria(!isClavePrimaria());
     }
 
 //    @Override
@@ -113,5 +125,16 @@ public class DoubleEllipse extends ArrastrableControl implements IAtributeContro
     public void editarControl(Event event) {
         Optional<String> cadena = JavaFXUtil.input("Editar", "Introduce el nuevo texto", "Actual: " + label.getText());
         cadena.ifPresent(s -> label.setText(s));
+    }
+
+    @Override
+    public void setClavePrimaria(boolean clavePrimaria) {
+        // Pone el label en subrayado si es clave primaria
+        label.setUnderline(clavePrimaria);
+    }
+
+    @Override
+    public boolean isClavePrimaria() {
+        return label.isUnderline();
     }
 }

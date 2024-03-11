@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -20,6 +22,12 @@ public class CustomEllipse extends ArrastrableControl implements IAtributeContro
 
     public CustomEllipse(Pane contenedor) {
         super(contenedor);
+
+        // Añade una opción al menú contextual para establecer si es clave primaria
+        MenuItem clavePrimariaMenuItem = new MenuItem("Clave primaria");
+        clavePrimariaMenuItem.setOnAction(this::toggleClavePrimaria);
+        SeparatorMenuItem separador = new SeparatorMenuItem();
+        getRightClickMenu().getItems().addAll(separador, clavePrimariaMenuItem);
 
         // Establece el tamaño por defecto del componente
         setWidth(100);
@@ -48,6 +56,10 @@ public class CustomEllipse extends ArrastrableControl implements IAtributeContro
 
         // Añade los controles al lienzo
         getChildren().addAll(ellipse, label);
+    }
+
+    private void toggleClavePrimaria(ActionEvent actionEvent) {
+        setClavePrimaria(!isClavePrimaria());
     }
 
 //    @Override
@@ -125,4 +137,14 @@ public class CustomEllipse extends ArrastrableControl implements IAtributeContro
         return new CustomControlSkin(this);
     }
 
+    @Override
+    public void setClavePrimaria(boolean clavePrimaria) {
+        // Pone el label en subrayado si es clave primaria
+        label.setUnderline(clavePrimaria);
+    }
+
+    @Override
+    public boolean isClavePrimaria() {
+        return label.isUnderline();
+    }
 }

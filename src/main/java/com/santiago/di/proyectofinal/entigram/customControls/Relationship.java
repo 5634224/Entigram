@@ -10,15 +10,15 @@ import javafx.scene.shape.Line;
 
 public class Relationship {
     private IEntityControl entity1;
-    private IEntityControl entity2;
+    private IArrastrableControl entity2;
     private Line line;
     private IRelationControl rhombus;
     private Pane lienzo;
 
-    public Relationship(IEntityControl entity1, IEntityControl entity2, IRelationControl relacionador) {
+    public Relationship(IEntityControl entity1, IArrastrableControl entity2, IRelationControl relacionador, Line linea) {
         this.entity1 = entity1;
         this.entity2 = entity2;
-        this.line = new Line();
+        this.line = linea;
         this.rhombus = relacionador;
         this.lienzo = entity1.getContenedor() != null ? entity1.getContenedor() : entity2.getContenedor() != null ? entity2.getContenedor() : relacionador.getContenedor() != null ? relacionador.getContenedor() : null;
 
@@ -39,8 +39,16 @@ public class Relationship {
         lienzo.getChildren().add((Pane) rhombus);
     }
 
+    public Relationship(IEntityControl entity1, IArrastrableControl entity2, Line linea) {
+        this(entity1, entity2, null, linea);
+    }
+
+    public Relationship(IEntityControl entity1, IArrastrableControl entity2) {
+        this(entity1, entity2, null, null);
+    }
+
     public Relationship() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     // Actualiza la posición de la línea para que conecte las IEntityControl
@@ -59,11 +67,11 @@ public class Relationship {
         this.entity1 = entity1;
     }
 
-    public IEntityControl getEntity2() {
+    public IArrastrableControl getEntity2() {
         return entity2;
     }
 
-    public void setEntity2(IEntityControl entity2) {
+    public void setEntity2(IArrastrableControl entity2) {
         this.entity2 = entity2;
     }
 
@@ -81,5 +89,13 @@ public class Relationship {
 
     public void setRhombus(IRelationControl rhombus) {
         this.rhombus = rhombus;
+    }
+
+    public Pane getLienzo() {
+        return lienzo;
+    }
+
+    public void setLienzo(Pane lienzo) {
+        this.lienzo = lienzo;
     }
 }

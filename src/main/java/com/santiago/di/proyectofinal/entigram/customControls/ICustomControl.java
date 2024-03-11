@@ -1,6 +1,7 @@
 package com.santiago.di.proyectofinal.entigram.customControls;
 
 import javafx.scene.Parent;
+import javafx.scene.control.ContextMenu;
 
 /**
  * Interfaz que permite identificar a los controles personalizados, y expone los métodos de CustomControl.
@@ -12,4 +13,6 @@ public interface ICustomControl<T extends Parent> {
     T getContenedor();
 
     void enableEditarControl(boolean enable);
+
+    ContextMenu getRightClickMenu();
 }
