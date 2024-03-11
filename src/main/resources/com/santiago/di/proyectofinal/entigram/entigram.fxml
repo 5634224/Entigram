@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -138,100 +128,100 @@
       </ScrollPane>
    </left>
    <right>
-      <AnchorPane prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">
-         <children>
-            <Accordion layoutX="3.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <panes>
-                <TitledPane animated="false" text="Propiedades">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="17.0" layoutY="14.0" text="Nombre" />
-                              <TextField fx:id="txtFieldNombre" layoutX="17.0" layoutY="30.0" />
-                              <TextArea fx:id="txtAreaDescripcion" layoutX="17.0" layoutY="105.0" prefHeight="200.0" prefWidth="171.0" />
-                              <Label layoutX="17.0" layoutY="89.0" text="Descripción" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </TitledPane>
-                <TitledPane animated="false" expanded="false" text="Documento">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </TitledPane>
-              </panes>
-            </Accordion>
-         </children></AnchorPane>
+<!--      <AnchorPane prefWidth="207.0" styleClass="back-grey" BorderPane.alignment="CENTER">-->
+<!--         <children>-->
+<!--            <Accordion layoutX="3.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
+<!--              <panes>-->
+<!--                <TitledPane animated="false" text="Propiedades">-->
+<!--                  <content>-->
+<!--                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">-->
+<!--                           <children>-->
+<!--                              <Label layoutX="17.0" layoutY="14.0" text="Nombre" />-->
+<!--                              <TextField fx:id="txtFieldNombre" layoutX="17.0" layoutY="30.0" />-->
+<!--                              <TextArea fx:id="txtAreaDescripcion" layoutX="17.0" layoutY="105.0" prefHeight="200.0" prefWidth="171.0" />-->
+<!--                              <Label layoutX="17.0" layoutY="89.0" text="Descripción" />-->
+<!--                           </children>-->
+<!--                        </AnchorPane>-->
+<!--                  </content>-->
+<!--                </TitledPane>-->
+<!--                <TitledPane animated="false" expanded="false" text="Documento">-->
+<!--                  <content>-->
+<!--                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />-->
+<!--                  </content>-->
+<!--                </TitledPane>-->
+<!--              </panes>-->
+<!--            </Accordion>-->
+<!--         </children></AnchorPane>-->
    </right>
    <center>
       <ScrollPane styleClass="back-blue" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="pnLienzo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" styleClass="back-white" />
+            <Pane fx:id="pnLienzo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="2000.0" minWidth="2000.0" onDragDropped="#pnLienzo_onDragDropped" onDragOver="#pnLienzo_onDragOver" styleClass="back-white" />
          </content>
       </ScrollPane>
    </center>
    <top>
-      <VBox prefHeight="53.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                        <MenuItem mnemonicParsing="false" text="Deshacer">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
-                        </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Rehacer">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="Y" control="ANY" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
-                        </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="btnDeshacer" mnemonicParsing="false" onAction="#btnDeshacer">
-                     <tooltip>
-                        <Tooltip fx:id="toolTipDeshacer" text="Deshacer" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/deshacer/1x/baseline_undo_black_24dp.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-                  <Button fx:id="btnRehacer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRehacer">
-                     <tooltip>
-                        <Tooltip fx:id="toolTipRehacer" text="Rehacer" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/png/v2/rehacer/1x/baseline_redo_black_24dp.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-              </items>
-            </ToolBar>
-         </children>
-      </VBox>
+<!--      <VBox prefHeight="53.0" prefWidth="800.0" BorderPane.alignment="CENTER">-->
+<!--         <children>-->
+<!--            <MenuBar>-->
+<!--              <menus>-->
+<!--                <Menu mnemonicParsing="false" text="File">-->
+<!--                  <items>-->
+<!--                    <MenuItem mnemonicParsing="false" text="Close" />-->
+<!--                  </items>-->
+<!--                </Menu>-->
+<!--                <Menu mnemonicParsing="false" text="Edit">-->
+<!--                  <items>-->
+<!--                        <MenuItem mnemonicParsing="false" text="Deshacer">-->
+<!--                           <accelerator>-->
+<!--                              <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="UP" shortcut="UP" />-->
+<!--                           </accelerator>-->
+<!--                        </MenuItem>-->
+<!--                        <MenuItem mnemonicParsing="false" text="Rehacer">-->
+<!--                           <accelerator>-->
+<!--                              <KeyCodeCombination alt="UP" code="Y" control="ANY" meta="UP" shift="UP" shortcut="UP" />-->
+<!--                           </accelerator>-->
+<!--                        </MenuItem>-->
+<!--                        <SeparatorMenuItem mnemonicParsing="false" />-->
+<!--                    <MenuItem mnemonicParsing="false" text="Delete" />-->
+<!--                  </items>-->
+<!--                </Menu>-->
+<!--                <Menu mnemonicParsing="false" text="Help">-->
+<!--                  <items>-->
+<!--                    <MenuItem mnemonicParsing="false" text="About" />-->
+<!--                  </items>-->
+<!--                </Menu>-->
+<!--              </menus>-->
+<!--            </MenuBar>-->
+<!--            <ToolBar prefHeight="40.0" prefWidth="200.0">-->
+<!--              <items>-->
+<!--                <Button fx:id="btnDeshacer" mnemonicParsing="false" onAction="#btnDeshacer">-->
+<!--                     <tooltip>-->
+<!--                        <Tooltip fx:id="toolTipDeshacer" text="Deshacer" />-->
+<!--                     </tooltip>-->
+<!--                     <graphic>-->
+<!--                        <ImageView pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@images/png/v2/deshacer/1x/baseline_undo_black_24dp.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+<!--                     </graphic></Button>-->
+<!--                  <Button fx:id="btnRehacer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRehacer">-->
+<!--                     <tooltip>-->
+<!--                        <Tooltip fx:id="toolTipRehacer" text="Rehacer" />-->
+<!--                     </tooltip>-->
+<!--                     <graphic>-->
+<!--                        <ImageView pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@images/png/v2/rehacer/1x/baseline_redo_black_24dp.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+<!--                     </graphic>-->
+<!--                  </Button>-->
+<!--              </items>-->
+<!--            </ToolBar>-->
+<!--         </children>-->
+<!--      </VBox>-->
    </top>
    <bottom>
       <HBox fillHeight="false" spacing="10.0" BorderPane.alignment="CENTER">

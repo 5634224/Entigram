@@ -43,20 +43,22 @@ public class EntigramController implements Initializable, IDragObserver {
     private Button btnAtributoDerivado;
     @FXML
     private Pane pnLienzo;
-    @FXML
-    private TextField txtFieldNombre;
-    @FXML
-    private TextArea txtAreaDescripcion;
+//    @FXML
+//    private TextField txtFieldNombre;
+//    @FXML
+//    private TextArea txtAreaDescripcion;
     @FXML
     private Label lblEstado;
     @FXML
     private Button btnRelacionDebil;
-    @FXML
-    private Button btnDeshacer;
-    @FXML
-    private Button btnRehacer;
-    @FXML
-    private Tooltip toolTipDeshacer;
+//    @FXML
+//    private Button btnDeshacer;
+//    @FXML
+//    private Button btnRehacer;
+//    @FXML
+//    private Tooltip toolTipDeshacer;
+//    @FXML
+//    private Tooltip toolTipRehacer;
     @FXML
     private Tooltip toolTipRelacion;
     @FXML
@@ -73,8 +75,6 @@ public class EntigramController implements Initializable, IDragObserver {
     private Tooltip toolTipAtributoDerivado;
     @FXML
     private Tooltip toolTipRelacionDebil;
-    @FXML
-    private Tooltip toolTipRehacer;
 
     /*==================== MÉTODOS ====================*/
     @Override
@@ -93,7 +93,8 @@ public class EntigramController implements Initializable, IDragObserver {
         relaciones = new ArrayList<>();
 
         // Establece el tiempo de espera para mostrar los tooltips
-        toolTipDeshacer.setShowDelay(Duration.seconds(duracionToolTips));
+//        toolTipDeshacer.setShowDelay(Duration.seconds(duracionToolTips));
+//        toolTipRehacer.setShowDelay(Duration.seconds(duracionToolTips));
         toolTipRelacion.setShowDelay(Duration.seconds(duracionToolTips));
         toolTipAtributoMultivaluado.setShowDelay(Duration.seconds(duracionToolTips));
         toolTipAtributo.setShowDelay(Duration.seconds(duracionToolTips));
@@ -102,7 +103,6 @@ public class EntigramController implements Initializable, IDragObserver {
         toolTipEntidad.setShowDelay(Duration.seconds(duracionToolTips));
         toolTipAtributoDerivado.setShowDelay(Duration.seconds(duracionToolTips));
         toolTipRelacionDebil.setShowDelay(Duration.seconds(duracionToolTips));
-        toolTipRehacer.setShowDelay(Duration.seconds(duracionToolTips));
     }
 
     /**
