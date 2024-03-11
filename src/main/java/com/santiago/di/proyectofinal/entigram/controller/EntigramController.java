@@ -13,6 +13,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -374,17 +375,41 @@ public class EntigramController implements Initializable, IDragObserver {
             // Activa el arrastre de los controles
             for (Node nodo : pnLienzo.getChildren()) {
                 if (nodo instanceof IArrastrableControl) {
-                    IArrastrableControl entidad = (IArrastrableControl) nodo;
+                    ArrastrableControl entidad = (ArrastrableControl) nodo;
                     entidad.setArrastrable(true);
                 }
             }
+            currentRelationship = null;
         } else {
             lblEstado.setText("Herramienta relación. Por favor, seleccione dos entidades o una entidad y un atributo");
             // Desactiva el arrastre de los controles
             for (Node nodo : pnLienzo.getChildren()) {
                 if (nodo instanceof IArrastrableControl) {
-                    IArrastrableControl entidad = (IArrastrableControl) nodo;
+                    ArrastrableControl entidad = (ArrastrableControl) nodo;
                     entidad.setArrastrable(false);
+
+                    // Agrega un evento de click a la entidad para relacionar dos entidades
+                    entidad.setOnMouseClicked(event -> {
+                        if (currentRelationship == null) {
+                            if (event.getSource() instanceof IEntityControl) {
+                                currentRelationship = new Relationship();
+                                currentRelationship.setEntity1((IEntityControl) event.getSource());
+                            }
+                        } else {
+                            if (event.getSource() instanceof IArrastrableControl) {
+                                currentRelationship.setEntity2((IArrastrableControl) event.getSource());
+                                relaciones.add(currentRelationship);
+                                currentRelationship.setLine1(new Line());
+                                currentRelationship.setLine2(new Line());
+                                currentRelationship.setLienzo(pnLienzo);
+                                currentRelationship.setCardinalidad1(new LabelControl(pnLienzo));
+                                currentRelationship.setCardinalidad2(new LabelControl(pnLienzo));
+                                currentRelationship.setRhombus(new Rhombus(pnLienzo));
+
+                                currentRelationship = null;
+                            }
+                        }
+                    });
                 }
             }
         }

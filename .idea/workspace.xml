@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Relationship v1 (todavia no está programado ningún botón para probarlo)">
+    <list default="true" id="e476270a-746e-4cbe-a332-05376aafba74" name="Changes" comment="Claves primarias atributos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/CustomEllipse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/DoubleEllipse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IAtributeControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/IAtributeControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/ICustomControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/ICustomControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Relationship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/customControls/Relationship.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +165,7 @@
       <workItem from="1709571259996" duration="1288000" />
       <workItem from="1709679446861" duration="35000" />
       <workItem from="1709827794456" duration="10149000" />
-      <workItem from="1709896442107" duration="82582000" />
+      <workItem from="1709896442107" duration="93781000" />
     </task>
     <task id="LOCAL-00001" summary="Primer commit.&#10;Features implementadas:&#10;- Interfaz básica de la aplicación.&#10;- Arrastrar y soltar algunos elementos por el lienzo (entidades, entidades débiles, relaciones, relaciones débiles, atributos)&#10;&#10;Features en proceso de implementación:&#10;- Mostrar labels en los custom controls&#10;- Hacer que se puedan unir mediante líneas los diversos controles en el lienzo&#10;- Hacer que la barra de estado se muestre sea cual sea el tamaño de la ventana&#10;&#10;Features futuras:&#10;- Terminar de añadir componentes básicos de un modelo de entidad-relación&#10;- Implementar custom Lines (para poder poner las cardinalidades con Labels sobre dicha línea)&#10;- Hacer que las relaciones se guarden. Ejemplo: relaciones de entidad a entidad (con notación rombo/diamante), o relaciones de entidad a atributo (con una simple línea)">
       <option name="closed" value="true" />
@@ -252,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710114581405</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Claves primarias atributos">
+      <option name="closed" value="true" />
+      <created>1710128688523</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710128688523</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +270,8 @@
     <MESSAGE value="Todos los componentes arreglados, proyecto listo para implementar las relaciones y unión con flechas" />
     <MESSAGE value="Interfaces añadidas" />
     <MESSAGE value="Relationship v1 (todavia no está programado ningún botón para probarlo)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Relationship v1 (todavia no está programado ningún botón para probarlo)" />
+    <MESSAGE value="Claves primarias atributos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Claves primarias atributos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -290,7 +294,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/santiago/di/proyectofinal/entigram/controller/EntigramController.java</url>
-          <line>224</line>
+          <line>225</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
